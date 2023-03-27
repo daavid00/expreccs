@@ -1,0 +1,48 @@
+"""Set the full path to the flow executable and flags"""
+/Users/dmar/Github/opm/build/opm-simulators/bin/flow_gasoil --enable-opm-rst-file=true
+
+"""Set the model parameters"""
+15150 15150 16            #Reginonal aquifer length, width, and depth [m]
+15 15 8                   #Number of x-, y-, and z-cells [-] 
+6060 6060 0 9090 9090 16  #Site xi, yi, zi, xf, yf, and zf box positions [m]
+15 15 8                   #Number of x-, y-, and z-cells in the site reservoir [-]
+9090 9090 0 0 10          #Fault x, y, and z positions [m] and x and y multipliers for the trans
+4                         #Number of layers  
+
+"""Set the saturation functions"""
+krw * (sew) ** 1.0       #Wetting rel perm saturation function [-]
+krc * (1 - sew) ** 1.0   #Non-wetting rel perm saturation function [-]
+pec * sew ** (-1.0)      #Capillary pressure saturation function [Pa]
+
+"""Properties sat functions"""
+"""swi [-], swrg [-], krg [-], krw [-],pe [MPa]"""
+SWI1 0.10 SWRG1 0.10 KRW1 1. KRG1 0.95 PRE1 1E-2
+SWI1 0.15 SWRG1 0.15 KRW1 1. KRG1 0.80 PRE1 2E-2
+SWI1 0.20 SWRG1 0.20 KRW1 1. KRG1 0.75 PRE1 3E-2
+SWI1 0.25 SWRG1 0.25 KRW1 1. KRG1 0.70 PRE1 3E-2
+
+"""Properties rock""" PERM3 4E3 PORO3 0.1
+"""K [mD], phi [-]"""
+PERM1 2E3 PORO1 0.1
+PERM2 3E3 PORO2 0.2
+PERM3 4E3 PORO2 0.3
+PERM3 5E3 PORO2 0.4
+
+"""Wells position"""
+"""x, y, and z position [m]"""
+7575 7575 5  #Well 1 
+11362.5 11362.5 5 #Well 2 
+11362.5 3787.5 5  #Well 3
+
+"""Define the injection values 'inj[]'""" 
+"""injection time [d], time step size to write results [d], injection rates [kg/day], injected fluid (0 water, 1 co2)"""
+73. 73. 5e5 1 2e7 1 0 0
+73. 73. 5e5 1 2e7 1 0 0
+73. 73. 5e5 1 2e7 1 0 0
+73. 73. 5e5 1 2e7 1 0 0
+73. 73. 5e5 1 2e7 1 0 0
+73. 73. 5e5 1 0 0 2e7 1
+73. 73. 5e5 1 0 0 2e7 1
+73. 73. 5e5 1 0 0 2e7 1
+73. 73. 5e5 1 0 0 2e7 1
+73. 73. 5e5 1 0 0 2e7 1 
