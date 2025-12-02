@@ -79,7 +79,7 @@ def create_deck(dic):
         dic["acoeff"] = np.array([float(dic["acoeff"][0])] * (len(dic["isdays"]) - 1))
     else:
         dic["acoeff"] = np.array([float(val) for val in dic["acoeff"]])
-    if max(dic["freq"]) <= 0:
+    if np.max(dic["freq"]) <= 0:
         dic["sdays"] = []
     dic["sopn"] = ["0"] * (
         dic["sgrid"].dimension[0]
@@ -88,7 +88,7 @@ def create_deck(dic):
     )
     if not os.path.exists(f"{dic['fol']}"):
         os.system(f"mkdir {dic['fol']}")
-    if not os.path.exists(f"{dic['fol']}/bc") and max(dic["freq"]) > 0:
+    if not os.path.exists(f"{dic['fol']}/bc") and np.max(dic["freq"]) > 0:
         os.system(f"mkdir {dic['fol']}/bc")
     find_ij_orientation(dic)
     if dic["nonregular"]:
@@ -188,11 +188,11 @@ def create_deck(dic):
                         if n != dic["ksfips"][int(edit[5]) - 1]:
                             n = dic["ksfips"][int(edit[5]) - 1]
                             whr = fipr == n
-                            if sum(whr) > 0:
+                            if np.sum(whr) > 0:
                                 interp = LinearNDInterpolator(
                                     list(zip(x_i[whr], y_i[whr], z_i[whr])), z_p[whr]
                                 )
-                        if sum(whr) == 0:
+                        if np.sum(whr) == 0:
                             if i == 0:
                                 dic["sopn"][
                                     dic["sgrid"].global_index(
@@ -302,7 +302,9 @@ def get_xymaps(dic, coords):
     act = np.array(dic["rinit"]["PORV"]) > 0
     for coord in coords:
         aind = int(
-            np.argmin(abs(c_x - coord[0]) + abs(c_y - coord[1]) + abs(c_z - coord[2]))
+            np.argmin(
+                np.abs(c_x - coord[0]) + np.abs(c_y - coord[1]) + np.abs(c_z - coord[2])
+            )
         )
         ijk = dic["rgrid"].ijk_from_active_index(aind)
         ind = dic["rgrid"].global_index(ijk[0], ijk[1], ijk[2])
@@ -401,7 +403,7 @@ def get_xymaps(dic, coords):
             inds.append(tmp)
             fipr.append(dic["rfip"][tmp])
     if dic["zones"] and z_i:
-        dic["rtmin"] = min(z_i)
+        dic["rtmin"] = np.min(z_i)
     return np.array(x_i), np.array(y_i), np.array(z_i), inds, np.array(fipr), offset
 
 
@@ -649,7 +651,7 @@ def handle_grid_coord(dic):
                     point = Point(xyz[0], xyz[1])
                     if poly.contains(point):
                         ind = pd.Series(
-                            abs(c_x[-1] - s_x) + abs(c_y[-1] - s_y)
+                            np.abs(c_x[-1] - s_x) + np.abs(c_y[-1] - s_y)
                         ).argmin()
                         ijk = dic["sgrid"].ijk_from_active_index(ind)
                         z_t = np.mean(
@@ -900,7 +902,7 @@ def check_intersection(dic, ind, gind, i, n):
                 x_p = xyz[0]
                 y_p = xyz[1]
                 l_p[1] = 1
-        if sum(l_p) == 2:
+        if np.sum(l_p) == 2:
             xy = [x_l, y_l, x_p, y_p]
             lines.append(LineString([(xy[0], xy[1]), (xy[2], xy[3])]))
         elif l_p[1] == 1:
@@ -979,14 +981,14 @@ def find_regional_cells(dic):
                         )
                         c_x[whr], c_y[whr], c_z[whr] = np.inf, np.inf, np.inf
                     ind = pd.Series(
-                        (abs(c_x - x_c) + abs(c_y - y_c) + abs(c_z - z_c))
+                        (np.abs(c_x - x_c) + np.abs(c_y - y_c) + np.abs(c_z - z_c))
                     ).argmin()
                 else:
                     ind = pd.Series(
                         (
-                            abs(dic["c_x"] - x_c)
-                            + abs(dic["c_y"] - y_c)
-                            + abs(dic["c_z"] - z_c)
+                            np.abs(dic["c_x"] - x_c)
+                            + np.abs(dic["c_y"] - y_c)
+                            + np.abs(dic["c_z"] - z_c)
                         )
                     ).argmin()
                 count += 1
@@ -1104,7 +1106,7 @@ def temporal_interpolation(dic):
         dic (dict): Modified global dictionary
 
     """
-    if max(dic["freq"]) > 0:
+    if np.max(dic["freq"]) > 0:
         dic["ddays"] = dic["sdays"][1:] - dic["sdays"][:-1]
         idays = []
         for i, day in enumerate(dic["sdays"][:-1]):
@@ -1200,8 +1202,8 @@ def project_pressures(dic, i):
                                 else:
                                     whs = dic[f"sf{p}"] == n
                                     d_t = np.round(
-                                        min(dic[f"rt{p}"][whr])
-                                        - min(dic[f"st{p}"][whs]),
+                                        np.min(dic[f"rt{p}"][whr])
+                                        - np.min(dic[f"st{p}"][whs]),
                                         2,
                                     )
                                     interp = LinearNDInterpolator(
@@ -1320,7 +1322,7 @@ def write_files(dic):
             if 0 < nrwo.find("\\t"):
                 nrwo = nrwo.replace("\\t", " ")
             lol.append(nrwo)
-            if lol[-1] == "GRID" and max(dic["freq"]) > 0:
+            if lol[-1] == "GRID" and np.max(dic["freq"]) > 0:
                 lol.append("INCLUDE")
                 lol.append("'BCCON.INC' /")
             if lol[-1] == "REGIONS":
@@ -1334,7 +1336,7 @@ def write_files(dic):
         for i, row in enumerate(lol):
             edit = row.split()
             if i < len(lol) - 1:
-                if lol[i + 1] == "TSTEP" and max(dic["freq"]) > 0:
+                if lol[i + 1] == "TSTEP" and np.max(dic["freq"]) > 0:
                     rep = lol[i + 2].split("*")
                     rep = int(rep[0]) if len(rep) > 1 else 1
                     file.write(row)
@@ -1358,7 +1360,7 @@ def write_files(dic):
                 if tstep == 0:
                     file.write(row)
     git = "--This file was generated by expreccs https://github.com/cssr-tools/expreccs"
-    if max(dic["freq"]) > 0:
+    if np.max(dic["freq"]) > 0:
         dic["sbound"].insert(0, "BCCON")
         dic["sbound"].insert(0, git)
         dic["sbound"].insert(0, "--Copyright (C) 2025 NORCE Research AS")

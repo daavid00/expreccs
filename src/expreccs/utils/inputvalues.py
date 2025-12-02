@@ -8,6 +8,7 @@ Utiliy functions to set the requiried input values by expreccs.
 import sys
 import tomllib
 import subprocess
+import numpy as np
 
 
 def process_input(dic, in_file):
@@ -34,9 +35,9 @@ def process_input(dic, in_file):
     dic["reference_dims"] = dic["regional_dims"]
     for res in ["regional", "reference"]:
         dic[f"{res}_num_cells"] = [
-            sum(dic[f"{res}_x_n"]),
-            sum(dic[f"{res}_y_n"]),
-            sum(dic[f"{res}_z_n"]),
+            np.sum(dic[f"{res}_x_n"]),
+            np.sum(dic[f"{res}_y_n"]),
+            np.sum(dic[f"{res}_z_n"]),
         ]
     dic["ntabs"] = dic["satnum"]
     if dic["hysteresis"]:

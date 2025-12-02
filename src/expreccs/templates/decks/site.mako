@@ -169,17 +169,17 @@ BCCON
 EDIT
 ----------------------------------------------------------------------------
 OPERATE
-PORV 1 ${dic['site_num_cells'][0]} 1 1 2* ADDX PORV ${dic["site_porv"][0]/(dic['site_num_cells'][0]*sum(dic["siteka"]))} /
-PORV ${dic['site_num_cells'][0]} ${dic['site_num_cells'][0]} 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][1]/(dic['site_num_cells'][1]*sum(dic["siteka"]))} /
-PORV 1 ${dic['site_num_cells'][0]} ${dic['site_num_cells'][1]} ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][2]/(dic['site_num_cells'][0]*sum(dic["siteka"]))} /
-PORV 1 1 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][3]/(dic['site_num_cells'][1]*sum(dic["siteka"]))} /
+PORV 1 ${dic['site_num_cells'][0]} 1 1 2* ADDX PORV ${dic["site_porv"][0]/(dic['site_num_cells'][0]*np.sum(dic["siteka"]))} /
+PORV ${dic['site_num_cells'][0]} ${dic['site_num_cells'][0]} 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][1]/(dic['site_num_cells'][1]*np.sum(dic["siteka"]))} /
+PORV 1 ${dic['site_num_cells'][0]} ${dic['site_num_cells'][1]} ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][2]/(dic['site_num_cells'][0]*np.sum(dic["siteka"]))} /
+PORV 1 1 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["site_porv"][3]/(dic['site_num_cells'][1]*np.sum(dic["siteka"]))} /
 / 
 % elif dic['site_bctype'][0] == 'porvproj':
 ----------------------------------------------------------------------------
 EDIT
 ----------------------------------------------------------------------------
 OPERATE
-% if sum(dic["siteka"]) == dic["site_num_cells"][2]:
+% if np.sum(dic["siteka"]) == dic["site_num_cells"][2]:
 PORV 1 ${dic['site_num_cells'][0]} 1 1 2* ADDX PORV ${dic["pv_bottom"]/(dic['site_num_cells'][0]*dic['site_num_cells'][2])} /
 PORV ${dic['site_num_cells'][0]} ${dic['site_num_cells'][0]} 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["pv_right"]/(dic['site_num_cells'][1]*dic['site_num_cells'][2])} /
 PORV 1 ${dic['site_num_cells'][0]} ${dic['site_num_cells'][1]} ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["pv_top"]/(dic['site_num_cells'][0]*dic['site_num_cells'][2])} /
@@ -187,10 +187,10 @@ PORV 1 1 1 ${dic['site_num_cells'][1]} 2* ADDX PORV ${dic["pv_left"]/(dic['site_
 % else:
 % for k in range(dic["site_num_cells"][2]):
 % if dic["siteka"][k]:
-PORV 1 ${dic['site_num_cells'][0]} 1 1 ${k+1} ${k+1} ADDX PORV ${dic["pv_bottom"]/(dic['site_num_cells'][0]*sum(dic["siteka"]))} /
-PORV ${dic['site_num_cells'][0]} ${dic['site_num_cells'][0]} 1 ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_right"]/(dic['site_num_cells'][1]*sum(dic["siteka"]))} /
-PORV 1 ${dic['site_num_cells'][0]} ${dic['site_num_cells'][1]} ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_top"]/(dic['site_num_cells'][0]*sum(dic["siteka"]))} /
-PORV 1 1 1 ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_left"]/(dic['site_num_cells'][1]*sum(dic["siteka"]))} /
+PORV 1 ${dic['site_num_cells'][0]} 1 1 ${k+1} ${k+1} ADDX PORV ${dic["pv_bottom"]/(dic['site_num_cells'][0]*np.sum(dic["siteka"]))} /
+PORV ${dic['site_num_cells'][0]} ${dic['site_num_cells'][0]} 1 ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_right"]/(dic['site_num_cells'][1]*np.sum(dic["siteka"]))} /
+PORV 1 ${dic['site_num_cells'][0]} ${dic['site_num_cells'][1]} ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_top"]/(dic['site_num_cells'][0]*np.sum(dic["siteka"]))} /
+PORV 1 1 1 ${dic['site_num_cells'][1]} ${k+1} ${k+1} ADDX PORV ${dic["pv_left"]/(dic['site_num_cells'][1]*np.sum(dic["siteka"]))} /
 % endif
 % endfor
 % endif

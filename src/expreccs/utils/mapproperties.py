@@ -39,7 +39,7 @@ def mapping_properties(dic):
                     ):
                         dic[f"{res}_{name}"].append(
                             ((k + 1.0) / num) * dic["thickness"][j]
-                            + sum(dic["thickness"][:j])
+                            + np.sum(dic["thickness"][:j])
                         )
                     else:
                         dic[f"{res}_{name}"].append(
@@ -57,7 +57,7 @@ def mapping_properties(dic):
             dic[f"{res}_num_cells"][i] = len(dic[f"{res}_{name}"]) - 1
         dic[f"{res}_layers"] = np.zeros(dic[f"{res}_num_cells"][2], int)
         for i, _ in enumerate(dic["thickness"]):
-            dic[f"{res}_layers"] += dic[f"{res}_zmz_mid"] > sum(
+            dic[f"{res}_layers"] += dic[f"{res}_zmz_mid"] > np.sum(
                 dic["thickness"][: i + 1]
             )
     for res in ["site"]:
@@ -74,13 +74,13 @@ def mapping_properties(dic):
         dic[f"{res}_layers"] = np.zeros(dic[f"{res}_num_cells"][2], int)
         dic[f"{res}_zmaps"] = np.zeros(dic[f"{res}_num_cells"][2], int)
         for i, _ in enumerate(dic["thickness"]):
-            dic[f"{res}_layers"] += dic[f"{res}_zmz_mid"] > sum(
+            dic[f"{res}_layers"] += dic[f"{res}_zmz_mid"] > np.sum(
                 dic["thickness"][: i + 1]
             )
         dic[f"{res}ka"] = [True] * dic[f"{res}_num_cells"][2]
         for i in range(dic[f"{res}_num_cells"][2]):
             dic[f"{res}_zmaps"][i] = pd.Series(
-                abs(dic["regional_zmz_mid"] - dic["site_zmz_mid"][i])
+                np.abs(dic["regional_zmz_mid"] - dic["site_zmz_mid"][i])
             ).argmin()
             dic[f"{res}ka"][i] = dic["rock"][int(dic[f"{res}_layers"][i])][2] > 0
     positions_reference(dic)
@@ -164,7 +164,7 @@ def positions_regional(dic):
                 indx += 1
             if (
                 indc > 0
-                and min(
+                and np.min(
                     int(val)
                     for val in dic["regional_fipnum"][-dic["regional_num_cells"][0] :]
                 )
@@ -190,7 +190,7 @@ def positions_regional(dic):
         dic["asright"] = False
     if dic["site_corners"][1][0] == -1:
         if (
-            min(
+            np.min(
                 int(val)
                 for val in dic["regional_fipnum"][-dic["regional_num_cells"][0] :]
             )
@@ -217,22 +217,22 @@ def positions_regional(dic):
         ):
             midpoints = dic[f"regional_{cord}_mid"]
             dic["regional_wellijk"][j].append(
-                pd.Series(abs(well_coord - midpoints)).argmin() + 1
+                pd.Series(np.abs(well_coord - midpoints)).argmin() + 1
             )
     for i, cord in enumerate(["xmx", "ymy", "zmz"]):
         midpoints = dic[f"regional_{cord}_mid"]
         if i < 2:
             dic["regional_fault"][i] = pd.Series(
-                abs(dic["fault_regional"][i] - midpoints)
+                np.abs(dic["fault_regional"][i] - midpoints)
             ).argmin()
             dic["regional_site_fault"][0][i] = pd.Series(
-                abs(dic["fault_site"][0][i] - midpoints)
+                np.abs(dic["fault_site"][0][i] - midpoints)
             ).argmin()
             dic["regional_site_fault"][1][i] = pd.Series(
-                abs(dic["fault_site"][1][i] - midpoints)
+                np.abs(dic["fault_site"][1][i] - midpoints)
             ).argmin()
         dic["regional_sensor"][i] = pd.Series(
-            abs(dic["sensor_coords"][i] - midpoints)
+            np.abs(dic["sensor_coords"][i] - midpoints)
         ).argmin()
 
 
@@ -261,8 +261,8 @@ def positions_rotation(dic):
         ):
             dic["site_wellijk"].append([])
             w_ij = pd.Series(
-                abs(dic["well_coords"][j][0] - dic["site_xc"])
-                + abs(dic["well_coords"][j][1] - dic["site_yc"])
+                np.abs(dic["well_coords"][j][0] - dic["site_xc"])
+                + np.abs(dic["well_coords"][j][1] - dic["site_yc"])
             ).argmin()
             w_j = np.floor(w_ij / dic["site_num_cells"][0])
             w_i = 1 + dic["site_num_cells"][0] - w_ij + (w_j) * dic["site_num_cells"][0]
@@ -273,19 +273,19 @@ def positions_rotation(dic):
             ):
                 midpoints = dic[f"site_{cord}_mid"]
                 dic["site_wellijk"][j].append(
-                    pd.Series(abs(well_coord - midpoints)).argmin() + 1
+                    pd.Series(np.abs(well_coord - midpoints)).argmin() + 1
                 )
     for k, cord in enumerate(["xmx", "ymy", "zmz"]):
         midpoints = dic[f"site_{cord}_mid"]
         if k < 2:
             dic["site_fault"][0][k] = pd.Series(
-                abs(dic["fault_site"][0][k] - midpoints)
+                np.abs(dic["fault_site"][0][k] - midpoints)
             ).argmin()
             dic["site_fault"][1][k] = pd.Series(
-                abs(dic["fault_site"][1][k] - midpoints)
+                np.abs(dic["fault_site"][1][k] - midpoints)
             ).argmin()
         dic["site_sensor"][k] = pd.Series(
-            abs(dic["sensor_coords"][k] - midpoints)
+            np.abs(dic["sensor_coords"][k] - midpoints)
         ).argmin()
 
 
@@ -318,19 +318,19 @@ def positions_site(dic):
             ):
                 midpoints = dic[f"site_{cord}_mid"]
                 dic["site_wellijk"][j].append(
-                    pd.Series(abs(well_coord - midpoints)).argmin() + 1
+                    pd.Series(np.abs(well_coord - midpoints)).argmin() + 1
                 )
     for k, cord in enumerate(["xmx", "ymy", "zmz"]):
         midpoints = dic[f"site_{cord}_mid"]
         if k < 2:
             dic["site_fault"][0][k] = pd.Series(
-                abs(dic["fault_site"][0][k] - midpoints)
+                np.abs(dic["fault_site"][0][k] - midpoints)
             ).argmin()
             dic["site_fault"][1][k] = pd.Series(
-                abs(dic["fault_site"][1][k] - midpoints)
+                np.abs(dic["fault_site"][1][k] - midpoints)
             ).argmin()
         dic["site_sensor"][k] = pd.Series(
-            abs(dic["sensor_coords"][k] - midpoints)
+            np.abs(dic["sensor_coords"][k] - midpoints)
         ).argmin()
 
 
@@ -369,20 +369,20 @@ def positions_reference(dic):
         ):
             midpoints = dic[f"reference_{cord}_mid"]
             dic["reference_wellijk"][j].append(
-                pd.Series(abs(well_coord - midpoints)).argmin() + 1
+                pd.Series(np.abs(well_coord - midpoints)).argmin() + 1
             )
     for i, cord in enumerate(["xmx", "ymy", "zmz"]):
         midpoints = dic[f"reference_{cord}_mid"]
         if i < 2:
             dic["reference_fault"][i] = pd.Series(
-                abs(dic["fault_regional"][i] - midpoints)
+                np.abs(dic["fault_regional"][i] - midpoints)
             ).argmin()
             dic["reference_site_fault"][0][i] = pd.Series(
-                abs(dic["fault_site"][0][i] - midpoints)
+                np.abs(dic["fault_site"][0][i] - midpoints)
             ).argmin()
             dic["reference_site_fault"][1][i] = pd.Series(
-                abs(dic["fault_site"][1][i] - midpoints)
+                np.abs(dic["fault_site"][1][i] - midpoints)
             ).argmin()
         dic["reference_sensor"][i] = pd.Series(
-            abs(dic["sensor_coords"][i] - midpoints)
+            np.abs(dic["sensor_coords"][i] - midpoints)
         ).argmin()

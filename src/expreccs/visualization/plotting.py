@@ -7,6 +7,7 @@ Script to plot the top surface for the reference, regional, and site reservoirs.
 """
 
 import os
+import shutil
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -39,7 +40,7 @@ def plot_results(dic):
     matplotlib.rc("font", **font)
     plt.rcParams.update(
         {
-            "text.usetex": dic["latex"],
+            "text.usetex": shutil.which("latex") != "None",
             "font.family": "monospace",
             "legend.columnspacing": 0.9,
             "legend.handlelength": 2.2,
@@ -532,7 +533,7 @@ def over_time_distance(dic):
                                 dic[f"{fol}/site_boxf"][0] - dic["dx_half_size"][-1],
                             ]
                         ):
-                            closest_distance[i] = min(
+                            closest_distance[i] = np.min(
                                 np.array([abs(row[0] - border) for row in points])
                             )
                         for i, border in enumerate(
@@ -541,11 +542,11 @@ def over_time_distance(dic):
                                 (dic[f"{fol}/site_boxf"][1] - dic["dy_half_size"][-1]),
                             ]
                         ):
-                            closest_distance[i + 2] = min(
+                            closest_distance[i + 2] = np.min(
                                 np.array([abs(row[1] - border) for row in points])
                             )
                         dic[f"{fol}/{res}_indicator_plot"].append(
-                            closest_distance.min() / 1000.0
+                            np.min(closest_distance) / 1000.0
                         )
                     else:
                         dic[f"{fol}/{res}_indicator_plot"].append(
@@ -759,7 +760,7 @@ def over_time_max_difference(dic, nqua, quantity):
             dic[f"{fol}/{res}_difference_{quantity}"] = []
             dic[f"{fol}/{res}_maximum_{quantity}"] = []
             for nrst in range(dic[f"{fol}/{res}_num_rst"]):
-                quant = abs(
+                quant = np.abs(
                     np.array(dic[f"{fol}/reference_{quantity}_array"][nrst])[
                         dic[f"{fol}/reference_fipn"] == 1
                     ]
@@ -775,13 +776,13 @@ def over_time_max_difference(dic, nqua, quantity):
                             * (len(dic[f"{fol}/site_xmx"]) - 1)
                             + k
                         ] = 0
-                dic[f"{fol}/{res}_difference_{quantity}"].append(max(quant))
+                dic[f"{fol}/{res}_difference_{quantity}"].append(np.max(quant))
                 dic[f"{fol}/{res}_maximum_{quantity}"].append(
-                    max(dic[f"{fol}/{res}_{quantity}_array"][nrst])
+                    np.max(dic[f"{fol}/{res}_{quantity}_array"][nrst])
                 )
                 if j == 0:
                     dic[f"reference_maximum_{quantity}"].append(
-                        max(
+                        np.max(
                             dic[f"{fol}/reference_{quantity}_array"][nrst][
                                 dic[f"{fol}/reference_fipn"] == 1
                             ]
@@ -790,7 +791,7 @@ def over_time_max_difference(dic, nqua, quantity):
             handle_labels_difference(dic, res, j, nqua, nfol)
     dic["axis"][nqua].set_title(
         r"$\max|$REF-SITE|, $\max$(REF)="
-        + f"{np.array(dic[f'reference_maximum_{quantity}']).max():.2E}"
+        + f"{np.max(dic[f'reference_maximum_{quantity}']):.2E}"
     )
     dic["axis"][nqua].set_ylabel(dic["units"][nqua])
     dic["axis"][nqua].set_xlabel("Time")
@@ -902,7 +903,7 @@ def handle_labels_difference(dic, res, j, nqua, nfol):
             dic[f"l{res}"]
             + f" ({dic['lfolders'][nfol]})"
             + r", $\max$="
-            + f"{np.array(dic[f'{fol}/{res}_maximum_{quantity}']).max():.2E}"
+            + f"{np.max(dic[f'{fol}/{res}_maximum_{quantity}']):.2E}"
         )
         dic["axis"][nqua].step(
             dic[f"{fol}/{res}_dates"],
@@ -915,7 +916,7 @@ def handle_labels_difference(dic, res, j, nqua, nfol):
         label = (
             dic[f"l{res}"]
             + r", $\max$="
-            + f"{np.array(dic[f'{fol}/{res}_maximum_{quantity}']).max():.2E}"
+            + f"{np.max(dic[f'{fol}/{res}_maximum_{quantity}']):.2E}"
         )
         dic["axis"][nqua].step(
             dic[f"{fol}/{res}_dates"],
