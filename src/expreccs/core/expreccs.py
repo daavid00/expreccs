@@ -6,6 +6,7 @@
 
 import os
 import sys
+import shutil
 import argparse
 import warnings
 from expreccs.utils.inputvalues import process_input
@@ -40,7 +41,6 @@ def expreccs():
     dic["acoeff"] = (cmdargs["acoeff"].strip()).split(
         ","
     )  # Coefficient telescopic partition
-    dic["latex"] = int(cmdargs["latex"])  # LaTeX formatting
     dic["boundaries"] = (cmdargs["boundaries"].strip())[1:-1].split(",")  # Boundaries
     dic["boundaries"] = [int(val) for val in dic["boundaries"]]
     dic["compare"] = cmdargs["compare"]
@@ -120,6 +120,13 @@ def expreccs():
 
     # Generate some useful plots after the studies
     if dic["plot"] != "no":
+        if shutil.which("latex") == "None":
+            print(
+                "\nLaTeX is recommended for the figures to show the "
+                "nice fonts and given formats. You can install it by "
+                "following the instructions in the expreccs's "
+                "documentation."
+            )
         if not dic["subfolders"]:
             print(
                 "\nThe generation of plots requires the subfolder structure, "
@@ -212,12 +219,6 @@ def load_parser():
         "--warnings",
         default=0,
         help="Set to 1 to print warnings ('0' by default).",
-    )
-    parser.add_argument(
-        "-l",
-        "--latex",
-        default=1,
-        help="Set to 0 to not use LaTeX formatting (1' by default).",
     )
     parser.add_argument(
         "-e",

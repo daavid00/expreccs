@@ -58,15 +58,15 @@ def final_time_maps(dic):
                     )
                     axis.set_xticks(
                         np.linspace(
-                            0 * 5 + dic[f"{fol}/{dic['name']}_xcor"].min() / 1000.0,
-                            0 * 10 + dic[f"{fol}/{dic['name']}_xcor"].max() / 1000.0,
+                            0 * 5 + np.min(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
+                            0 * 10 + np.max(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
                             6,
                         )
                     )
                     axis.set_yticks(
                         np.linspace(
-                            0 * 5 + dic[f"{fol}/{dic['name']}_ycor"].min() / 1000.0,
-                            0 * 10 + dic[f"{fol}/{dic['name']}_ycor"].max() / 1000.0,
+                            0 * 5 + np.min(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
+                            0 * 10 + np.max(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
                             6,
                         )
                     )
@@ -74,8 +74,8 @@ def final_time_maps(dic):
                     # axis.set_title(f"REFERENCE (Case 4)")
                     # axis.set_title("REGIONAL (Cases 1, 2, and 3)")
                     # axis.set_title(f"REGIONAL: {dic['lfolders'][nfol]} (Case 2)")
-                    maxp = dic[f"{fol}/{res}_{quantity}_plot"].max()
-                    minp = dic[f"{fol}/{res}_{quantity}_plot"].min()
+                    maxp = np.max(dic[f"{fol}/{res}_{quantity}_plot"])
+                    minp = np.min(dic[f"{fol}/{res}_{quantity}_plot"])
                     # minp, maxp = -0.55, 0.43
                     axis.axis("scaled")
                     axis.set_xlabel("Easting [km]")
@@ -174,24 +174,24 @@ def final_time_maps_difference(dic):
                     )
                     axis.axis(
                         [
-                            dic[f"{fol}/{dic['name']}_xcor"].min() / 1000.0,
-                            dic[f"{fol}/{dic['name']}_xcor"].max() / 1000.0,
-                            dic[f"{fol}/{dic['name']}_ycor"].min() / 1000.0,
-                            dic[f"{fol}/{dic['name']}_ycor"].max() / 1000.0,
+                            np.min(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
+                            np.max(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
+                            np.min(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
+                            np.max(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
                         ]
                     )
                     axis.axis("scaled")
                     axis.set_xticks(
                         np.linspace(
-                            dic[f"{fol}/{dic['name']}_xcor"].min() / 1000.0,
-                            dic[f"{fol}/{dic['name']}_xcor"].max() / 1000.0,
+                            np.min(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
+                            np.max(dic[f"{fol}/{dic['name']}_xcor"]) / 1000.0,
                             6,
                         )
                     )
                     axis.set_yticks(
                         np.linspace(
-                            dic[f"{fol}/{dic['name']}_ycor"].min() / 1000.0,
-                            dic[f"{fol}/{dic['name']}_ycor"].max() / 1000.0,
+                            np.min(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
+                            np.max(dic[f"{fol}/{dic['name']}_ycor"]) / 1000.0,
                             6,
                         )
                     )
@@ -200,13 +200,13 @@ def final_time_maps_difference(dic):
                     axis.set_title(
                         r"SITE $\sum$|REF-"
                         + f"{dic[f'l{res}']}"
-                        + f"|={abs(dic[f'{fol}/{res}_difference_{quantity}_plot']).sum():.2E}"
+                        + f"|={np.abs(np.sum(dic[f'{fol}/{res}_difference_{quantity}_plot'])):.2E}"
                     )
                     # axis.spines['left'].set_color('white')
                     # axis.yaxis.label.set_color('white')
                     # axis.tick_params(axis='y', colors='white')
-                    maxp = dic[f"{fol}/{res}_difference_{quantity}_plot"].max()
-                    minp = dic[f"{fol}/{res}_difference_{quantity}_plot"].min()
+                    maxp = np.max(dic[f"{fol}/{res}_difference_{quantity}_plot"])
+                    minp = np.min(dic[f"{fol}/{res}_difference_{quantity}_plot"])
                     # minp, maxp = -0.27, 0.27
                     divider = make_axes_locatable(axis)
                     cax = divider.append_axes("right", size="5%", pad=1e-3)
@@ -296,8 +296,8 @@ def geological_maps(dic):
                             cmap="jet",
                         )
                         axis.set_title(dic[f"l{res}"] + f" {quan}")
-                        maxp = dic[f"{fol}/{res}_{quan}_plot"].max()
-                        minp = dic[f"{fol}/{res}_{quan}_plot"].min()
+                        maxp = np.max(dic[f"{fol}/{res}_{quan}_plot"])
+                        minp = np.min(dic[f"{fol}/{res}_{quan}_plot"])
                         # minp, maxp = -0.27, 0.27
                         divider = make_axes_locatable(axis)
                         cax = divider.append_axes("right", size="5%", pad=1e-3)

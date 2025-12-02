@@ -16,7 +16,7 @@ and adapt those files to the ones in the `tccs-13 folder <https://github.com/css
 
     You should not run the ORIGINAL.DATA file before adapting it with the actual Troll aquifer model, since it has a lot of active cells.
 
-For the first figures, `plopm <https://github.com/cssr-tools/plopm.git>`_ and `pycopm <https://github.com/cssr-tools/pycopm.git>`_ are used, which can be installed by:
+For the first figures, `plopm <https://github.com/cssr-tools/plopm>`_ and `pycopm <https://github.com/cssr-tools/pycopm>`_ are used, which can be installed by:
 
 .. code-block:: bash
 
@@ -24,7 +24,7 @@ For the first figures, `plopm <https://github.com/cssr-tools/plopm.git>`_ and `p
     pip install git+https://github.com/cssr-tools/pycopm.git
 
 To run the optimization, `Everest <https://github.com/equinor/everest-tutorials>`_ is needed,
-which is installed via `ert <https://github.com/equinor/ert>`_ when `pycopm <https://github.com/cssr-tools/pycopm>`_ is installed with the command above.
+which is installed via `ert <https://github.com/equinor/ert>`_ when pycopm is installed with the command above.
 
 .. note::
 

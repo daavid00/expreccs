@@ -1,0 +1,11 @@
+cff-version: "1.2.0"
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: Landa-Marbán
+  given-names: David
+  orcid: "https://orcid.org/0000-0002-3343-1005"
+title: "expreccs: A Python framework using OPM Flow to simulate 
+  regional and site reservoirs for CO2 storage"
+year: 2024
+doi: 10.5281/zenodo.12100600
+url: "https://github.com/cssr-tools/expreccs"

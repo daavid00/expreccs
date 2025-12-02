@@ -91,7 +91,7 @@ def reading_simulations(dic, doplot=True):  # pylint: disable=R0915, R0912
                     for seconds in dic[f"{fol}/{res}_smsp_dates"]
                 ]
                 dic[f"{fol}/{res}_smsp_rst"] = [
-                    pd.Series(abs(dic[f"{fol}/{res}_smsp_seconds"] - time)).argmin()
+                    pd.Series(np.abs(dic[f"{fol}/{res}_smsp_seconds"] - time)).argmin()
                     for time in dic[f"{fol}/{res}_rst_seconds"]
                 ]
                 dic[f"{fol}/{res}_sensorijk"] = []

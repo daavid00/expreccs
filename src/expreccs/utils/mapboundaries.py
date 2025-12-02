@@ -124,24 +124,24 @@ def porv_projections(dic):
     opernum = np.array(ini["OPERNUM"])
     mask = porv > 0
     dic["pv_bottom"] = (
-        porv[mask][opernum == 2].sum()
-        + 0.5 * porv[mask][opernum == 9].sum()
-        + 0.5 * porv[mask][opernum == 6].sum()
+        np.sum(porv[mask][opernum == 2])
+        + 0.5 * np.sum(porv[mask][opernum == 9])
+        + 0.5 * np.sum(porv[mask][opernum == 6])
     )
     dic["pv_right"] = (
-        porv[mask][opernum == 3].sum()
-        + 0.5 * porv[mask][opernum == 6].sum()
-        + 0.5 * porv[mask][opernum == 7].sum()
+        np.sum(porv[mask][opernum == 3])
+        + 0.5 * np.sum(porv[mask][opernum == 6])
+        + 0.5 * np.sum(porv[mask][opernum == 7])
     )
     dic["pv_top"] = (
-        porv[mask][opernum == 4].sum()
-        + 0.5 * porv[mask][opernum == 7].sum()
-        + 0.5 * porv[mask][opernum == 8].sum()
+        np.sum(porv[mask][opernum == 4])
+        + 0.5 * np.sum(porv[mask][opernum == 7])
+        + 0.5 * np.sum(porv[mask][opernum == 8])
     )
     dic["pv_left"] = (
-        porv[mask][opernum == 5].sum()
-        + 0.5 * porv[mask][opernum == 8].sum()
-        + 0.5 * porv[mask][opernum == 9].sum()
+        np.sum(porv[mask][opernum == 5])
+        + 0.5 * np.sum(porv[mask][opernum == 8])
+        + 0.5 * np.sum(porv[mask][opernum == 9])
     )
 
 

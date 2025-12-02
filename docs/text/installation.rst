@@ -52,7 +52,7 @@ You also need to install:
 .. tip::
 
     See the `CI.yml <https://github.com/cssr-tools/expreccs/blob/main/.github/workflows/CI.yml>`_ script 
-    for installation of OPM Flow (binary packages) and the expreccs package in Ubuntu. 
+    for installation of OPM Flow (binary packages), LaTeX (optional) libraries, and the expreccs package in Ubuntu 24.04 and Python 3.11. 
 
 Source build in Linux/Windows
 +++++++++++++++++++++++++++++
@@ -136,5 +136,4 @@ then building OPM Flow can be achieved with the following bash lines:
 
 This builds OPM Flow, and it exports the path to the flow executable (i.e., executing in the terminal **which flow** should print the path).
 
-For macOS, the LaTeX dependency can be installed from https://www.tug.org/mactex/. If after installation you still face an error due to LaTeX 
-when executing expreccs, then add the flag **-latex 0** to expreccs.
+For macOS, the (optional but recommended) LaTeX dependency can be installed from https://www.tug.org/mactex/.

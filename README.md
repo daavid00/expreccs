@@ -41,7 +41,7 @@ pip install -e .
 pip install -r dev-requirements.txt
 ``` 
 
-See the [_installation_](https://cssr-tools.github.io/exprecss/installation.html) for further details on installing binaries or building OPM Flow from the master branches in Linux, Windows, and macOS, as well as the opm Python package and LaTeX dependencies.
+See the [_installation_](https://cssr-tools.github.io/exprecss/installation.html) for further details on installing binaries or building OPM Flow from the master branches in Linux, Windows, and macOS, as well as the (optional) LaTeX dependencies.
 
 ## Running expreccs
 You can run _expreccs_ as a single command line:
