@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023-2025 NORCE Research AS
+# SPDX-FileCopyrightText: 2023-2026 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0915
 
@@ -8,7 +8,6 @@ import os
 import sys
 import shutil
 import argparse
-import warnings
 from expreccs.utils.inputvalues import process_input
 from expreccs.utils.runs import run_models, plotting
 from expreccs.utils.writefile import write_folders, write_properties
@@ -25,8 +24,6 @@ def expreccs():
     """Main function for the expreccs executable"""
     cmdargs = load_parser()
     check_cmdargs(cmdargs)
-    if int(cmdargs["warnings"]) == 0:
-        warnings.warn = lambda *args, **kwargs: None
     file = (cmdargs["input"].strip()).split(" ")  # Name of the input file
     dic = {"fol": os.path.abspath(cmdargs["output"])}  # Name for the output folder
     dic["pat"] = os.path.dirname(__file__)[:-5]  # Path to the expreccs folder
@@ -213,12 +210,6 @@ def load_parser():
         "for the given frequency '-f'. Write an array, e.g., '2.2,0,3.1', to set "
         "the coefficient in each site report step ('3.2' by default, use 0 for an "
         "equidistance partition).",
-    )
-    parser.add_argument(
-        "-w",
-        "--warnings",
-        default=0,
-        help="Set to 1 to print warnings ('0' by default).",
     )
     parser.add_argument(
         "-e",

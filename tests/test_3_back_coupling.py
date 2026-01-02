@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024-2025 NORCE Research AS
+# SPDX-FileCopyrightText: 2024-2026 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 
 """Test the expreccs functionality for back-coupling"""
@@ -6,13 +6,16 @@
 import os
 import pathlib
 
-dirname: pathlib.Path = pathlib.Path(__file__).parent
+testpth: pathlib.Path = pathlib.Path(__file__).parent
 
 
 def test_back_coupling():
     """See configs/back-coupling.toml"""
-    os.chdir(f"{dirname}/configs")
-    os.system("expreccs -i back-coupling.toml -o back -p yes -w 1")
+    if not os.path.exists(f"{testpth}/output"):
+        os.system(f"mkdir {testpth}/output")
+    os.system(
+        f"expreccs -i {testpth}/configs/back-coupling.toml -o {testpth}/output/back -p yes"
+    )
     assert os.path.exists(
-        f"{dirname}/configs/back/postprocessing/back_difference_site_porvproj_watfluxi+.png"
+        f"{testpth}/output/back/postprocessing/back_difference_site_porvproj_watfluxi+.png"
     )
