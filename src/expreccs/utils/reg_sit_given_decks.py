@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 NORCE Research AS
+# SPDX-FileCopyrightText: 2025-2026 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=C0302,R0914,R1702,R0912,R0915,E1102
 
@@ -143,7 +143,7 @@ def create_deck(dic):
         dic["oprn"] = compact_format(dic["oprn"])
         dic["oprn"].insert(0, "OPERNUM\n")
         dic["oprn"].insert(0, git)
-        dic["oprn"].insert(0, "--Copyright (C) 2025 NORCE Research AS\n")
+        dic["oprn"].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS\n")
         dic["oprn"].append("/")
         with open(
             f"{dic['freg']}/OPERNUM_EXPRECCS.INC",
@@ -1053,7 +1053,7 @@ def find_regional_cells(dic):
     dic["oprn"] = compact_format(dic["oprn"])
     dic["oprn"].insert(0, "OPERNUM\n")
     dic["oprn"].insert(0, git)
-    dic["oprn"].insert(0, "--Copyright (C) 2025 NORCE Research AS\n")
+    dic["oprn"].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS\n")
     dic["oprn"].append("/")
     with open(
         f"{dic['freg']}/OPERNUM_EXPRECCS.INC",
@@ -1064,7 +1064,7 @@ def find_regional_cells(dic):
     dic["fipn"] = compact_format(dic["fipn"])
     dic["fipn"].insert(0, "FIPNUM\n")
     dic["fipn"].insert(0, git)
-    dic["fipn"].insert(0, "--Copyright (C) 2025 NORCE Research AS\n")
+    dic["fipn"].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS\n")
     dic["fipn"].append("/")
     with open(
         f"{dic['freg']}/FIPNUM_EXPRECCS.INC",
@@ -1363,7 +1363,7 @@ def write_files(dic):
     if np.max(dic["freq"]) > 0:
         dic["sbound"].insert(0, "BCCON")
         dic["sbound"].insert(0, git)
-        dic["sbound"].insert(0, "--Copyright (C) 2025 NORCE Research AS")
+        dic["sbound"].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS")
         dic["sbound"].append("/")
         with open(
             f"{dic['fol']}/BCCON.INC",
@@ -1376,7 +1376,7 @@ def write_files(dic):
             dic["sbc"][i].insert(0, "BCPROP\n")
             dic["sbc"][i].insert(0, f"--No. days = {dic['sdays'][i]:.2f}\n")
             dic["sbc"][i].insert(0, git + "\n")
-            dic["sbc"][i].insert(0, "--Copyright (C) 2025 NORCE Research AS\n")
+            dic["sbc"][i].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS\n")
             dic["sbc"][i].append("/")
             with open(
                 f"{dic['fol']}/bc/BCPROP{i}.INC",
@@ -1387,7 +1387,7 @@ def write_files(dic):
     dic["sopn"] = compact_format(dic["sopn"])
     dic["sopn"].insert(0, "OPERNUM\n")
     dic["sopn"].insert(0, git + "\n")
-    dic["sopn"].insert(0, "--Copyright (C) 2025 NORCE Research AS\n")
+    dic["sopn"].insert(0, "--Copyright (C) 2025-2026 NORCE Research AS\n")
     dic["sopn"].append("/")
     with open(
         f"{dic['fol']}/OPERNUM_EXPRECCS.INC",
