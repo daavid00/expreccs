@@ -205,9 +205,9 @@ BASIC=2 DEN PCGW FLOWS${" FLOWS-" if dic["iterations"] > 0 else ""} /
 WELSPECS
 % for i in range(len(dic['regional_wellijk'])):
 % if i < len(dic["site_wellijk"]):
-INJS${i} G1 ${dic['regional_wellijk'][i][0]} ${dic['regional_wellijk'][i][1]} 1* GAS /
+INJS${i} G1 ${dic['regional_wellijk'][i][0]} ${dic['regional_wellijk'][i][1]} 1* ${'GAS 'if dic['inj'][0][1][2*i] > 0 else 'WAT'} /
 % else:
-INJR${i-len(dic["site_wellijk"])} G1 ${dic['regional_wellijk'][i][0]} ${dic['regional_wellijk'][i][1]} 1* GAS /
+INJR${i-len(dic["site_wellijk"])} G1 ${dic['regional_wellijk'][i][0]} ${dic['regional_wellijk'][i][1]} 1* ${'GAS 'if dic['inj'][0][1][2*i] > 0 else 'WAT'} /
 % endif
 % endfor
 /

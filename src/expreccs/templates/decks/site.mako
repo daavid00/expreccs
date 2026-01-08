@@ -338,7 +338,7 @@ BASIC=2 DEN PCGW FLOWS${" FLOWS-" if dic["iterations"] > 0 else ""} /
 
 WELSPECS
 % for i in range(len(dic['site_wellijk'])):
-INJS${i} G1 ${dic['site_wellijk'][i][0]} ${dic['site_wellijk'][i][1]} 1* GAS /
+INJS${i} G1 ${dic['site_wellijk'][i][0]} ${dic['site_wellijk'][i][1]} 1* ${'GAS 'if dic['inj'][0][1][2*i] > 0 else 'WAT'} /
 % endfor
 % if dic['site_bctype'][0] == 'wells':
 BCINJ0 W ${mt.ceil(dic['site_num_cells'][0]/2)} 1 1* WAT /

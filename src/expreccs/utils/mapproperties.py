@@ -320,18 +320,19 @@ def positions_site(dic):
                 dic["site_wellijk"][j].append(
                     pd.Series(np.abs(well_coord - midpoints)).argmin() + 1
                 )
-    for k, cord in enumerate(["xmx", "ymy", "zmz"]):
-        midpoints = dic[f"site_{cord}_mid"]
-        if k < 2:
-            dic["site_fault"][0][k] = pd.Series(
-                np.abs(dic["fault_site"][0][k] - midpoints)
+    if dic["fault_site"][-1][0] != 1 and dic["fault_site"][-1][1] != 1:
+        for k, cord in enumerate(["xmx", "ymy", "zmz"]):
+            midpoints = dic[f"site_{cord}_mid"]
+            if k < 2:
+                dic["site_fault"][0][k] = pd.Series(
+                    np.abs(dic["fault_site"][0][k] - midpoints)
+                ).argmin()
+                dic["site_fault"][1][k] = pd.Series(
+                    np.abs(dic["fault_site"][1][k] - midpoints)
+                ).argmin()
+            dic["site_sensor"][k] = pd.Series(
+                np.abs(dic["sensor_coords"][k] - midpoints)
             ).argmin()
-            dic["site_fault"][1][k] = pd.Series(
-                np.abs(dic["fault_site"][1][k] - midpoints)
-            ).argmin()
-        dic["site_sensor"][k] = pd.Series(
-            np.abs(dic["sensor_coords"][k] - midpoints)
-        ).argmin()
 
 
 def positions_reference(dic):
