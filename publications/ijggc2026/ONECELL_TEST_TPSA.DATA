@@ -1,0 +1,189 @@
+-- This reservoir simulation deck is made available under the Open Database
+-- License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in
+-- individual contents of the database are licensed under the Database Contents
+-- License: http://opendatacommons.org/licenses/dbcl/1.0/
+-- Copyright (C) 2026 NORCE Research AS
+
+RUNSPEC
+TITLE
+ 'ONE CELL TEST MODEL' /
+
+START
+1 JAN 2024 /
+
+METRIC
+
+UNIFOUT
+
+DIMENS
+1 1 1 /
+
+TABDIMS
+1 1 /
+
+WELLDIMS
+3 10 1 3/
+
+CO2STORE
+GAS
+WATER
+
+MECH
+MECHSOLV
+TPSA /
+
+GRID
+INIT
+
+DX
+1*50000 /
+
+DY
+1*50000 /
+
+DZ
+1*100 /
+
+TOPS
+1*2000 /
+
+ACTNUM
+1*1 /
+
+PORO
+1*0.3 /
+
+PERMX
+1*1000 /
+
+COPY
+PERMX PERMY /
+PERMX PERMZ /
+/
+
+MULTIPLY
+PERMZ 0.1 /
+/
+
+BIOTCOEF
+1*0.87 /
+
+SMODULUS
+1*3.5 /
+
+LAME
+1*4.0 /
+
+
+--The first column indicate which boundary-conditions
+--to use. See BCPROP below.
+BCCON
+10 4* 1 1 Z- /
+10 4* 1 1 Z /
+10 1 1 4* X- /
+10 1 1 4* X /
+10 2* 1 1 2* Y- /
+10 2* 1 1 2* Y /
+/
+
+PROPS
+
+ROCKOPTS
+ 1* 'STORE' /
+
+ROCK
+200 2.05263e-6 /
+--200 4.18895E-05 / -- total compressibility approach
+
+GSF
+0 0 0
+0.8 0.8 0
+/
+
+WSF
+0.2 0
+1.0 1.0
+/
+
+
+REGIONS
+
+FIPNUM
+1*1/
+
+SOLUTION
+
+EQUIL
+2000 200.0 1* 0.0 1* 0.0 2* /
+
+RTEMP
+ 100
+/
+
+ 
+SUMMARY
+RPR
+/
+RPRP
+/
+RGMDS
+/
+RGMIP
+/
+FPR
+FPRP
+FGMIP
+FGMDS
+FGMIR
+FGMIT
+FGIT
+FRPV
+RRPV
+/
+WGMIR
+/
+WGMIT
+/
+WBHP
+/
+
+SCHEDULE
+
+-- Data in Row 1,2 and 6-10 are used to populate
+-- Figure 1. Modify column 1 in BCCON accordingly.
+BCPROP
+1 NONE 4* FREE /
+2 NONE 4* NONE /
+3 NONE 4* SPRING 9* 0 3.5/
+4 NONE 4* SPRING 9* 1e99 3.5/
+5 NONE 4* SPRING 9* 25e3 3.5/
+6 NONE 4* SPRING 9* 10e3 3.5/
+7 NONE 4* SPRING 9* 5e3 3.5/
+8 NONE 4* SPRING 9* 1e3 3.5/
+9 NONE 4* SPRING 9* 1e2 3.5/
+10 NONE 4* SPRING 9* 1e1 3.5/
+/
+
+RPTRST
+BASIC=1 DEN RPORV/
+
+WELSPECS
+'GINJ1' 'G' 1 1 1* 'GAS' /
+/
+
+COMPDAT
+'GINJ1' 1 1 1 1 'OPEN' 1* 1e9 0.311 1* /
+/
+
+WCONINJE
+'GINJ1' 'GAS' 'OPEN' 'RATE' 7326596.10 1* 264.74 /
+/
+
+TSTEP
+100*365.25 /
+
+WELOPEN
+ 'GINJ1' 'SHUT' /
+/
+
+END
