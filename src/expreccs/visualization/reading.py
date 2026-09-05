@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0914,R0915,R1702
 
-"""Script to read OPM Flow output files"""
+"""Read and normalize OPM Flow output for expreccs visualization.
+
+The module discovers model cases, loads restart, initialization, grid, and
+summary files, derives dates and sensor locations, and builds saturation, mass,
+phase, pressure, and face-flux arrays consumed by plotting workflows.
+"""
 
 import datetime
 import os
@@ -19,7 +24,18 @@ KG_TO_KT = 1e-6
 
 
 def strip_trailing_digits(name):
-    """Handle the digits on the folder name"""
+    """Remove a trailing iteration suffix from a model name.
+
+    Parameters
+    ----------
+    name : Any
+        Model or folder name.
+
+    Returns
+    -------
+    str
+        Name without a trailing numeric suffix.
+    """
     i = len(name)
     while i > 0 and name[i - 1].isdigit():
         i -= 1
@@ -28,8 +44,14 @@ def strip_trailing_digits(name):
     return name[:i]
 
 
-def reading_simulations(dic):
-    """Read the deck quantities using opm"""
+def read_simulations(dic):
+    """Read selected OPM cases and prepare plotting arrays.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     for fol in dic["folders"]:
         dic[fol] = {}
         cwd = os.getcwd()
@@ -118,11 +140,22 @@ def reading_simulations(dic):
             for quantity in dic["quantity"]:
                 dic[fol][res][f"{quantity}_array"] = []
             dic[fol][res]["indicator_array"] = []
-            make_arrays(dic, fol, res)
+            build_arrays(dic, fol, res)
 
 
 def read_fluxes(case):
-    """Fluxes for the back coupling"""
+    """Read directional water fluxes for back-coupling.
+
+    Parameters
+    ----------
+    case : Any
+        Case.
+
+    Returns
+    -------
+    list[list[np.ndarray]]
+        Directional flux arrays by report step.
+    """
     rst = OpmRst(case + ".UNRST")
     nt = len(rst)
 
@@ -137,14 +170,35 @@ def read_fluxes(case):
 
 
 def read_mask(case):
-    """Mask for the back coupling"""
+    """Read the site-region mask from a regional case.
+
+    Parameters
+    ----------
+    case : Any
+        Case.
+
+    Returns
+    -------
+    np.ndarray
+        Boolean mask for cells in the site region.
+    """
     ini = OpmFile(case + ".INIT")
     fipn = np.array(ini["FIPNUM"])
     return fipn == 1
 
 
 def define_cases(dic, fol, folders):
-    """Handle the site folder names"""
+    """Identify site and iterative regional model folders.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    fol : Any
+        Output folder or model location.
+    folders : Any
+        Folders.
+    """
     dic[fol]["sites"] = [folder for folder in folders if "site" in folder]
     if "site_pres_2" in dic[fol]["sites"]:
         n_c = len(dic[fol]["sites"]) - 1
@@ -156,8 +210,18 @@ def define_cases(dic, fol, folders):
         )
 
 
-def make_arrays(dic, fol, res):
-    """Handle the quantities to plot"""
+def build_arrays(dic, fol, res):
+    """Build dynamic and static arrays used by plotting.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    fol : Any
+        Output folder or model location.
+    res : Any
+        Reservoir case name.
+    """
     phiv = dic[fol][res]["phiv"]
     mask = dic[fol][res]["mask"]
     poro = dic[fol][res]["poro"]
@@ -197,7 +261,7 @@ def make_arrays(dic, fol, res):
                     )
                 else:
                     dic[fol][res][f"{quantity}_array"].append(0.0 * sgas)
-    manage_names(dic, res)
+    set_model_names(dic, res)
     dic[fol][dic["namel"] + "_boxi"] = [
         dic[fol][res]["grid"].xyz_from_ijk(0, 0, 0)[i][0] for i in range(3)
     ]
@@ -233,7 +297,15 @@ def make_arrays(dic, fol, res):
     )
 
 
-def manage_names(dic, res):
-    """Figure out the folder names"""
+def set_model_names(dic, res):
+    """Set normalized geometry names for a reservoir case.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    res : Any
+        Reservoir case name.
+    """
     dic["namef"] = strip_trailing_digits(res)
     dic["namel"] = "site" if "site" in res else dic["namef"]

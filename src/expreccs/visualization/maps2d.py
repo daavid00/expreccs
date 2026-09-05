@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=E1102,R0913,R0914,R0917
 
-"""Script to plot the 2D top surfaces"""
+"""Generate two-dimensional maps for expreccs simulation results.
+
+The module reshapes active-cell arrays onto top-surface grids and writes final
+state, geological, and reference-to-site difference maps with consistent axes,
+color scales, labels, and progress reporting.
+"""
 
 import sys
 from contextlib import nullcontext
@@ -13,9 +18,26 @@ from alive_progress import alive_bar
 from matplotlib import colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
+from expreccs.utils.terminal import expreccs_info
+
 
 def reshape_to_2d(array_1d, nx, ny):
-    """Convert flat array to 2D grid (robust to oversized arrays)."""
+    """Reshape a flat cell array onto a two-dimensional grid.
+
+    Parameters
+    ----------
+    array_1d : Any
+        Flat cell-data array.
+    nx : Any
+        Number of cells in the x direction.
+    ny : Any
+        Number of cells in the y direction.
+
+    Returns
+    -------
+    np.ndarray
+        Array reshaped to ``(ny, nx)`` with reversed rows.
+    """
     expected = nx * ny
 
     if array_1d.size > expected:
@@ -37,7 +59,33 @@ def plot_map(
     show_colorbar=True,
     difference=False,
 ):
-    """Reusable 2D plotting function."""
+    """Write one two-dimensional field map.
+
+    Parameters
+    ----------
+    x : Any
+        X coordinates.
+    y : Any
+        Y coordinates.
+    data : Any
+        Values to plot.
+    title : Any
+        Figure title.
+    filename : Any
+        Output filename.
+    cmap : Any
+        Matplotlib colormap.
+    units : Any, optional
+        Colorbar label.
+    xticks : Any, optional
+        Whether to show x-axis ticks.
+    yticks : Any, optional
+        Whether to show y-axis ticks.
+    show_colorbar : Any, optional
+        Whether to draw a colorbar.
+    difference : Any, optional
+        Whether to use symmetric difference limits.
+    """
 
     fig, axis = plt.subplots()
 
@@ -93,8 +141,19 @@ def plot_map(
     plt.close()
 
 
-def manage_name(res):
-    """Figure out the folder names"""
+def model_group(res):
+    """Resolve a model name to its geometry group.
+
+    Parameters
+    ----------
+    res : Any
+        Reservoir case name.
+
+    Returns
+    -------
+    str
+        Normalized geometry-group name.
+    """
     if "regional" in res:
         return "regional"
     if "site" in res:
@@ -103,8 +162,14 @@ def manage_name(res):
 
 
 def final_time_maps(dic):
-    """Plot the 2D maps for the different reservoirs and quantities"""
-    print("Final time 2d maps:")
+    """Plot final-time fields for all selected reservoirs.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
+    expreccs_info("final time 2d maps:")
 
     show_progress = sys.stdout.isatty()
     if show_progress:
@@ -116,7 +181,7 @@ def final_time_maps(dic):
             for res in dic[fol]["decks"]:
                 if show_progress:
                     bar_animation()
-                name = manage_name(res)
+                name = model_group(res)
 
                 nx = len(dic[fol][name]["xmx"]) - 1
                 ny = len(dic[fol][name]["ymy"]) - 1
@@ -148,8 +213,14 @@ def final_time_maps(dic):
 
 
 def final_time_maps_difference(dic):
-    """Plot differences between reference and site at final timestep"""
-    print("Final time 2d maps difference:")
+    """Plot final-time differences between reference and site models.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
+    expreccs_info("final time 2d maps difference:")
     show_progress = sys.stdout.isatty()
     if show_progress:
         bar_ctx = alive_bar(dic["tod"], bar="fish")
@@ -160,7 +231,7 @@ def final_time_maps_difference(dic):
             for res in dic[fol]["sites"]:
                 if show_progress:
                     bar_animation()
-                name = manage_name(res)
+                name = model_group(res)
 
                 nx = len(dic[fol]["site"]["xmx"]) - 1
                 ny = len(dic[fol]["site"]["ymy"]) - 1
@@ -208,8 +279,14 @@ def final_time_maps_difference(dic):
 
 
 def geological_maps(dic):
-    """Plot static geological maps"""
-    print("Static 2d maps:")
+    """Plot static geological properties for selected reservoirs.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
+    expreccs_info("static 2d maps:")
     show_progress = sys.stdout.isatty()
     if show_progress:
         bar_ctx = alive_bar(dic["tot"], bar="fish")
@@ -220,7 +297,7 @@ def geological_maps(dic):
             for res in dic[fol]["decks"]:
                 if show_progress:
                     bar_animation()
-                name = manage_name(res)
+                name = model_group(res)
 
                 nx = len(dic[fol][name]["xmx"]) - 1
                 ny = len(dic[fol][name]["ymy"]) - 1

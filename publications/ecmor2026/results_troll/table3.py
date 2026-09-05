@@ -40,8 +40,8 @@ for model in [
         plopm = (
             f"plopm -i 'results/FILLED_MODEL' "
             "-v 'pressure - 0pressure' -s ',,1:217 ,,1:5' "
-            f"-diff results/{model}_MODEL "
-            f"-save {model.lower()}_diff -m csv {dual}"
+            f"-di results/{model}_MODEL "
+            f"-fn {model.lower()}_diff -m csv {dual}"
         )
         subprocess.run(plopm, shell=True, check=True)
         with open(f"{model.lower()}_diff.csv", "r", encoding="utf8") as file:

@@ -1,0 +1,980 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>expreccs.visualization.plotting module &#8212; expreccs documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/expreccs.visualization.plotting';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="expreccs.visualization.reading module" href="expreccs.visualization.reading.html" />
+    <link rel="prev" title="expreccs.visualization.maps2d module" href="expreccs.visualization.maps2d.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-05"/>
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="expreccs documentation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="expreccs documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related.html">
+    Related projects
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">expreccs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="expreccs.html">expreccs package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expreccs.core.html">expreccs.core package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expreccs.utils.html">expreccs.utils package</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="expreccs.visualization.html">expreccs.visualization package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="expreccs.visualization.maps2d.html">expreccs.visualization.maps2d module</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">expreccs.visualization.plotting module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expreccs.visualization.reading.html">expreccs.visualization.reading module</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">expreccs Python API</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">expreccs</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="expreccs.html" class="nav-link">expreccs package</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="expreccs.visualization.html" class="nav-link">expreccs.visualization package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">expreccs.visualization.plotting module</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-expreccs.visualization.plotting">
+<span id="expreccs-visualization-plotting-module"></span><h1>expreccs.visualization.plotting module<a class="headerlink" href="#module-expreccs.visualization.plotting" title="Link to this heading">#</a></h1>
+<p>Create time-series and spatial comparison figures for expreccs.</p>
+<p>This module coordinates visualization of reference, regional, and site-model
+results produced by OPM Flow. It configures Matplotlib, loads simulation data,
+and writes figures for field and site summary vectors, well controls, sensor
+responses, plume distance from the site boundary, and reference-to-site errors.</p>
+<p>The plotting workflow supports a single expreccs output folder and comparisons
+across several output folders. Summary quantities are read from SMSPEC data,
+while spatial quantities are derived from restart and initialization arrays by
+the visualization reading module. Two-dimensional geological, final-time, and
+difference maps are delegated to the maps2d module.</p>
+<p>Plotting state, loaded simulation data, labels, styles, and derived series are
+stored in the shared configuration dictionary. The main entry point initializes
+these values before dispatching the individual plotting routines.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.plot_results">
+<span class="sig-name descname"><span class="pre">plot_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#plot_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.plot_results" title="Link to this definition">#</a></dt>
+<dd><p>Generate all figures requested by the expreccs plotting workflow.</p>
+<p>Configure Matplotlib, identify output folders, initialize plotting metadata,
+read the selected OPM Flow cases, and dispatch summary, sensor, plume-distance,
+maximum-difference, geological, and final-time plots. In comparison mode,
+figures combine site results from multiple expreccs output folders with one
+reference result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting configuration. Expected entries include <code class="docutils literal notranslate"><span class="pre">folders</span></code>,
+<code class="docutils literal notranslate"><span class="pre">compare</span></code>, <code class="docutils literal notranslate"><span class="pre">plot</span></code>, and <code class="docutils literal notranslate"><span class="pre">iterations</span></code>. The routine adds output paths,
+labels, styles, loaded case data, figure counts, and plotting arrays.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.plotting_settings">
+<span class="sig-name descname"><span class="pre">plotting_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#plotting_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.plotting_settings" title="Link to this definition">#</a></dt>
+<dd><p>Initialize plotting styles, quantities, labels, and physical units.</p>
+<p>Populate the shared configuration with line colors, markers, line styles,
+reservoir labels, colormaps, restart quantities, output names, and axis units
+used consistently by the time-series and two-dimensional plotting routines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting configuration. <code class="docutils literal notranslate"><span class="pre">iterations</span></code> controls the labels generated
+for iteratively back-coupled regional models.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.wells_site">
+<span class="sig-name descname"><span class="pre">wells_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nquan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndeck</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nwell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#wells_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.wells_site" title="Link to this definition">#</a></dt>
+<dd><p>Add one well-control series to the current summary axis.</p>
+<p>Read bottom-hole pressure, gas-injection rate, or water-injection rate from the
+selected model summary. Injection rates are converted from surface-volume rates
+to megatonnes per year before the series is styled and added to the axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing folders, decks, summary vectors, dates,
+styles, labels, and the current <code class="docutils literal notranslate"><span class="pre">axis</span></code>.</p>
+</dd>
+<dt><strong>nquan</strong><span class="classifier">int</span></dt><dd><p>Summary-quantity index: 0 for <code class="docutils literal notranslate"><span class="pre">WBHP</span></code>, 1 for <code class="docutils literal notranslate"><span class="pre">WGIR</span></code>, or 2 for <code class="docutils literal notranslate"><span class="pre">WWIR</span></code>.</p>
+</dd>
+<dt><strong>nfol</strong><span class="classifier">int</span></dt><dd><p>Index of the current expreccs output folder.</p>
+</dd>
+<dt><strong>ndeck</strong><span class="classifier">int</span></dt><dd><p>Index of the reservoir case within the folder's selected decks.</p>
+</dd>
+<dt><strong>nwell</strong><span class="classifier">str</span></dt><dd><p>OPM summary well name used to construct the requested summary key.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.summary_site">
+<span class="sig-name descname"><span class="pre">summary_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndeck</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opmn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#summary_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.summary_site" title="Link to this definition">#</a></dt>
+<dd><p>Add one model summary vector to the current axis.</p>
+<p>Read the requested OPM summary key, convert gas in-place values to kilotonnes,
+and convert block face-flow rates to pore-area-normalized fluxes. In comparison
+mode, the reference series is plotted only from the first folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing model summaries, dates, sensor geometry,
+physical properties, styles, labels, and the current <code class="docutils literal notranslate"><span class="pre">axis</span></code>.</p>
+</dd>
+<dt><strong>nfol</strong><span class="classifier">int</span></dt><dd><p>Index of the current expreccs output folder.</p>
+</dd>
+<dt><strong>ndeck</strong><span class="classifier">int</span></dt><dd><p>Index of the selected reservoir case within that folder.</p>
+</dd>
+<dt><strong>opmn</strong><span class="classifier">str</span></dt><dd><p>Complete OPM summary key, including region, block, or well qualifiers.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.handle_site_summary">
+<span class="sig-name descname"><span class="pre">handle_site_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#handle_site_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.handle_site_summary" title="Link to this definition">#</a></dt>
+<dd><p>Add site-scale and reference series for one summary quantity.</p>
+<p>Iterate over selected non-regional models and dispatch region, block, or
+well-summary plotting according to the requested quantity. Site well plots are
+restricted to well names identified as site wells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing folders, selected decks, labels, loaded
+summaries, and the current <code class="docutils literal notranslate"><span class="pre">axis</span></code>.</p>
+</dd>
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Position of the requested quantity in the summary-quantity sequence.</p>
+</dd>
+<dt><strong>quantity</strong><span class="classifier">str</span></dt><dd><p>Summary quantity identifier, such as <code class="docutils literal notranslate"><span class="pre">BHP</span></code>, <code class="docutils literal notranslate"><span class="pre">PR</span></code>, <code class="docutils literal notranslate"><span class="pre">GIP</span></code>, or <code class="docutils literal notranslate"><span class="pre">BPR</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.summary_plot">
+<span class="sig-name descname"><span class="pre">summary_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#summary_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.summary_plot" title="Link to this definition">#</a></dt>
+<dd><p>Write site-scale and regional summary figures for one quantity.</p>
+<p>Create separate figures for the site/reference and regional/reference views,
+add all applicable model series, sort legend entries, format the time axis, and
+write both PNG files to the configured output directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing folders, model summaries, output paths,
+labels, styles, and the current figure and axis objects.</p>
+</dd>
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Index selecting the y-axis unit and well-summary quantity.</p>
+</dd>
+<dt><strong>quantity</strong><span class="classifier">str</span></dt><dd><p>OPM summary quantity identifier used in labels, keys, and filenames.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.over_time_distance">
+<span class="sig-name descname"><span class="pre">over_time_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#over_time_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.over_time_distance" title="Link to this definition">#</a></dt>
+<dd><p>Plot minimum plume distance from the site boundary over time.</p>
+<p>For the reference model and every site model, identify cells whose gas
+saturation exceeds the configured threshold, calculate their minimum horizontal
+distance to the inner site boundary, and write a combined time-series figure.
+The reference calculation is restricted to the site region through FIPNUM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing model grids, plume indicators, dates, site
+geometry, comparison settings, styles, and the saturation threshold.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.positions">
+<span class="sig-name descname"><span class="pre">positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.positions" title="Link to this definition">#</a></dt>
+<dd><p>Calculate centers of cells selected by a plume indicator.</p>
+<p>Obtain active-cell corner coordinates from the OPM grid and calculate the x, y,
+and z center of every cell marked by the selected restart-step indicator. For
+the reference model, only cells belonging to the site FIPNUM region are used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing model grids, indicator arrays, and reference
+FIPNUM values.</p>
+</dd>
+<dt><strong>fol</strong><span class="classifier">str</span></dt><dd><p>Absolute or relative path identifying the current expreccs output folder.</p>
+</dd>
+<dt><strong>res</strong><span class="classifier">str</span></dt><dd><p>Reservoir case name, such as <code class="docutils literal notranslate"><span class="pre">reference</span></code> or a site-model directory name.</p>
+</dd>
+<dt><strong>nrst</strong><span class="classifier">int</span></dt><dd><p>Restart-step index whose plume indicator is evaluated.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>np.ndarray</dt><dd><p>Array with shape <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">3)</span></code> containing selected cell-center coordinates. An
+empty <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">3)</span></code> array is returned when no cells satisfy the indicator.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.handle_labels_distance">
+<span class="sig-name descname"><span class="pre">handle_labels_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#handle_labels_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.handle_labels_distance" title="Link to this definition">#</a></dt>
+<dd><p>Add one labeled plume-distance series to the current axis.</p>
+<p>Select labels, colors, and line styles for a reference or site-model distance
+series. Comparison mode distinguishes output folders and plots the common
+reference only once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing dates, distance values, labels, styles,
+comparison state, and the active distance axis.</p>
+</dd>
+<dt><strong>nfol</strong><span class="classifier">int</span></dt><dd><p>Index of the current expreccs output folder.</p>
+</dd>
+<dt><strong>res</strong><span class="classifier">str</span></dt><dd><p>Reference or site reservoir case name.</p>
+</dd>
+<dt><strong>fol</strong><span class="classifier">str</span></dt><dd><p>Path identifying the current expreccs output folder.</p>
+</dd>
+<dt><strong>j</strong><span class="classifier">int</span></dt><dd><p>Position of the reservoir case in the reference-plus-sites sequence.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.over_time_max_difference">
+<span class="sig-name descname"><span class="pre">over_time_max_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqua</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#over_time_max_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.over_time_max_difference" title="Link to this definition">#</a></dt>
+<dd><p>Plot maximum absolute reference-to-site error over time.</p>
+<p>Restrict reference arrays to the site FIPNUM region, remove terminal boundary
+faces for positive-direction flux quantities, and calculate the maximum
+absolute difference for every site model and restart step. The resulting series
+are written together with the maximum reference value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing reference and site arrays, FIPNUM values,
+site dimensions, dates, labels, units, styles, and output paths.</p>
+</dd>
+<dt><strong>nqua</strong><span class="classifier">int</span></dt><dd><p>Index of the restart quantity and its corresponding axis, unit, and filename.</p>
+</dd>
+<dt><strong>quantity</strong><span class="classifier">str</span></dt><dd><p>Restart-derived quantity, such as saturation, pressure, phase flux, or CO2 mass.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.over_time_sensor">
+<span class="sig-name descname"><span class="pre">over_time_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqua</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#over_time_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.over_time_sensor" title="Link to this definition">#</a></dt>
+<dd><p>Plot one restart-derived quantity at the sensor over time.</p>
+<p>Extract the value at each model's sensor cell for every restart step and add the
+reference and site series to a dedicated figure. Comparison mode plots the
+reference once and identifies each site series by its output folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing sensor indices, restart arrays, dates,
+labels, units, styles, comparison state, and output paths.</p>
+</dd>
+<dt><strong>nqua</strong><span class="classifier">int</span></dt><dd><p>Index of the restart quantity and its corresponding figure, unit, and filename.</p>
+</dd>
+<dt><strong>quantity</strong><span class="classifier">str</span></dt><dd><p>Restart-derived quantity evaluated at the sensor cell.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreccs.visualization.plotting.handle_labels_difference">
+<span class="sig-name descname"><span class="pre">handle_labels_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nqua</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/expreccs/visualization/plotting.html#handle_labels_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreccs.visualization.plotting.handle_labels_difference" title="Link to this definition">#</a></dt>
+<dd><p>Add one labeled maximum-difference series to its axis.</p>
+<p>Construct a legend label containing the model name and maximum model value,
+then select colors and line styles according to comparison mode, output folder,
+and site-model position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dic</strong><span class="classifier">dict</span></dt><dd><p>Shared plotting data containing maximum-difference values, dates, labels,
+styles, quantities, comparison state, and active axes.</p>
+</dd>
+<dt><strong>res</strong><span class="classifier">str</span></dt><dd><p>Site reservoir case name.</p>
+</dd>
+<dt><strong>j</strong><span class="classifier">int</span></dt><dd><p>Index of the site model within the current output folder.</p>
+</dd>
+<dt><strong>nqua</strong><span class="classifier">int</span></dt><dd><p>Index of the plotted restart quantity and destination axis.</p>
+</dd>
+<dt><strong>nfol</strong><span class="classifier">int</span></dt><dd><p>Index of the current expreccs output folder.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="expreccs.visualization.maps2d.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">expreccs.visualization.maps2d module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="expreccs.visualization.reading.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">expreccs.visualization.reading module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.plot_results"><code class="docutils literal notranslate"><span class="pre">plot_results()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.plotting_settings"><code class="docutils literal notranslate"><span class="pre">plotting_settings()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.wells_site"><code class="docutils literal notranslate"><span class="pre">wells_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.summary_site"><code class="docutils literal notranslate"><span class="pre">summary_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.handle_site_summary"><code class="docutils literal notranslate"><span class="pre">handle_site_summary()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.summary_plot"><code class="docutils literal notranslate"><span class="pre">summary_plot()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.over_time_distance"><code class="docutils literal notranslate"><span class="pre">over_time_distance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.positions"><code class="docutils literal notranslate"><span class="pre">positions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.handle_labels_distance"><code class="docutils literal notranslate"><span class="pre">handle_labels_distance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.over_time_max_difference"><code class="docutils literal notranslate"><span class="pre">over_time_max_difference()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.over_time_sensor"><code class="docutils literal notranslate"><span class="pre">over_time_sensor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expreccs.visualization.plotting.handle_labels_difference"><code class="docutils literal notranslate"><span class="pre">handle_labels_difference()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/expreccs.visualization.plotting.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

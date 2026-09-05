@@ -1,54 +1,194 @@
-============
+.. _introduction:
+
 Introduction
 ============
 
-.. image:: ./figs/introduction.gif
-    :scale: 50% 
+.. image:: figs/introduction.gif
+   :alt: Regional-to-site CO2 storage simulation with expreccs
+   :align: center
+   :width: 95%
 
-This documentation describes the **expreccs** tool hosted in `https://github.com/cssr-tools/expreccs <https://github.com/cssr-tools/expreccs>`_.
+**expreccs** is a simplified and flexible framework for testing a two-stage
+approach with dynamic pressure boundary conditions in regional and site-scale
+CO2 storage simulations. It can generate integrated modeling studies or project
+dynamic boundary conditions between existing OPM Flow models with
+nonconforming grids.
 
-Concept
--------
-Simplified and flexible testing framework for a two-stage approach (dynamic pressure boundary conditions) to improve CO2 storage regional and site simulations:
+Core concept
+------------
 
-- Simulate the regional model (all timesteps).
-- Identify connections on the regional model that corresponds to the boundary of the site model.
-- Set the pressures from the regional model as boundary conditions on the site model.
-- Simulate the site model.
+The two-stage workflow connects a computationally efficient regional model with
+a higher-resolution site model:
 
-The current development of **expreccs** focuses on generic geological models, i.e., given the simulation decks for the regional model 
-and the site model, which grids do not need to conform, then to use **expreccs** for handling the boundary projections and modification 
-of the input decks to include the dynamic boundary updates.
+#. Simulate the regional model through all report steps.
+#. Identify the regional connections corresponding to the site-model boundary.
+#. Project regional pressures, pressure increases, fluxes, or pore-volume
+   effects to the site boundary.
+#. Simulate the site model with dynamically updated boundary conditions.
+#. Compare the site result with a higher-resolution reference model when one is
+   available.
 
-.. _overview:
+This approach accounts for regional pressure interference without requiring the
+complete regional grid resolution inside every site-scale simulation.
 
-Overview
---------
-The current implementation supports the following executable with the argument options:
+Supported model sources
+-----------------------
 
-.. code-block:: bash
+expreccs supports two main ways of defining a study.
 
-    expreccs -i name(s)_of_input_file(s)
+Integrated configuration
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-where 
+A :doc:`configuration file <configuration_file>` can generate the reference,
+regional, and site models together with their rock properties, faults, wells,
+schedules, and boundary conditions.
 
--i  The base name of the :doc:`configuration file <./configuration_file>`; or paths (space between them and quotation marks) to the regional and site models ('input.toml' by default).
--o  The base name of the :doc:`output folder <./output_folder>` ('output' by default).
--m  Run the whole framework ('all'), only the reference ('reference'), only the site ('site'), only the regional ('regional'), only the regional and site models ('regional_site'), or none ('none') ('all' by default).
--c  Generate metric plots for the current outputed folders ('compare') ('' by default).
--p  Create nice figures in the postprocessing folder ('no' by default).
--t  Grades to rotate the site geological model ('0' by default).
--b  Set the number of entries to skip the bc projections on the site, where 'j=0,i=nx-1,j=ny-1,i=0', e.g., '[0,2,0,0]' would skip all cells with i=nx and i=nx-1; this becomes handly for models where all cells in a given site are inactive along a side ('[0,0,0,0]' by default).
--f  Frequency to evaluate the boundary pressures on the site between report steps in the site. Write an array, e.g., '2,7,3', to set the frequency in each site report step ('1' by default).
--a  Exponential 'a' coefficient for the telescopic time-discretization for the given frequency '-f'. Write an array, e.g., '2.2,0,3.1', to set the coefficient in each site report step ('3.2' by default, use 0 for an equidistance partition).
--e  Set to 0 to write the pressure increase on the site bc from the regional values ('1' by default, i.e., the pressure values on the boundaries correspond to the explicit values on the regional simulations).
--z  Set to 1 to project the regional pressures per fipnum zones, i.e., the pressure maps to the site bcs are written for equal fipnum numbers in the whole xy layer ('0' by default, i.e., the projections include the z location offset between regional and site models).
--s  Set to 0 to not create the subfolders preprocessing, output, and postprocessing, i.e., to write all generated files in the output directory ('1' by default).
--n  Set to 1 for a site with irregular contour, i.e., not defined in a rectangle ('0' by default).
+Existing OPM Flow models
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-The valid flags for a toml **configuration file** are -i, -o, -m, -c, -p, -u, -t, -w, and -l. 
-The valid flags for paths to the regional and site folders are -i, -o, -b, -f, -a, -w, -e, -n, and -z.
+Existing regional and site OPM Flow decks can be supplied directly. Their grids
+do not need to conform. expreccs identifies the overlapping region, constructs
+the boundary mappings, processes the regional results, and writes the dynamic
+boundary updates required by the site model.
 
-In the **configuration file** the geological model is defined by generation
-of corner-point grids (cpg), adding heterogeinities (e.g., different rock properties, faults, hysteresis), wells, and defining schedules for the
-operations (see the :doc:`configuration file <./configuration_file>` section).
+Core workflows
+--------------
+
+* Generate corner-point grids for reference, regional, and site models.
+* Define heterogeneous rock and saturation properties.
+* Add faults, hysteresis, salinity, wells, and operational schedules.
+* Run complete, reference-only, regional-only, site-only, or
+  regional-and-site workflows.
+* Project pressure, pressure increase, flux, or pore-volume effects.
+* Apply dynamic conditions to regular or irregular site boundaries.
+* Interpolate projected values between regional report steps.
+* Construct projections by corresponding FIPNUM regions when the regional and
+  site models have a vertical offset.
+* Compare reference, regional, and site simulations.
+* Generate figures for pressure, gas saturation, well behavior, sensor
+  pressure, and boundary effects.
+* Support model coarsening, optimization, and reproducible research workflows.
+
+Basic usage
+-----------
+
+Run an integrated study defined by a TOML file:
+
+.. code-block:: console
+
+   expreccs -i examples/example1.toml -o hello_world
+
+Project dynamic boundary conditions between existing regional and site models:
+
+.. code-block:: console
+
+   expreccs -i "tests/regional/REGIONAL tests/site/SITE" -o projected
+
+Display the available command-line options:
+
+.. code-block:: console
+
+   expreccs --help
+
+Use :doc:`command-line` for exact syntax, defaults, and option compatibility.
+See :doc:`examples` for complete integrated, existing-deck, regular-boundary,
+and irregular-boundary workflows.
+
+Research development
+--------------------
+
+The **expreccs** Python tool was used to generate the published results for the
+hierarchical regional-to-site modeling study:
+
+   Tveit, S., Gasda, S. E., Landa-Marbán, D., and Sandve, T. H. (2025).
+   A hierarchical approach for modeling regional pressure interference in
+   multi-site CO2 operations. *Geoenergy Science and Engineering*, 248,
+   213733. https://doi.org/10.1016/j.geoen.2025.213733
+
+The scripts and configurations used to reproduce that study are available in
+the `examples/paper_2025 directory
+<https://github.com/cssr-tools/expreccs/tree/main/examples/paper_2025>`_.
+
+The directory contains four study folders:
+
+* ``Case1``
+* ``Case2``
+* ``Case3``
+* ``Case4``
+
+These cases use **expreccs** and implement the regional-to-site modeling and
+dynamic boundary-condition studies described in the paper. They remain
+available as publication-supporting examples in the repository but do not have
+a separate reproduction page in the online documentation.
+
+Related project publications
+----------------------------
+
+The expreccs repository also hosts the reproducibility material for TCCS-13 and
+ECMOR 2026. These studies are contributions from the broader expreccs research
+project and address model coarsening, pressure communication, and large-scale
+CO2 storage simulation.
+
+Unlike the 2025 hierarchical regional-to-site study, the TCCS-13 and ECMOR
+2026 reproduction workflows do not use the **expreccs** Python executable. They
+are hosted in this repository because they were developed within the same
+research project and share its OPM Flow modeling, preprocessing, visualization,
+and reproducibility infrastructure.
+
+TCCS-13
+~~~~~~~
+
+The :doc:`tccs-13` page documents the Troll aquifer coarsening and optimization
+study. Its workflow uses OPM Flow, pycopm, plopm, Everest, ResInsight, and
+supporting Python and shell scripts. It does not invoke the **expreccs**
+executable.
+
+ECMOR 2026
+~~~~~~~~~~
+
+The :doc:`ecmor2026` page documents the explicit non-net-cell treatment study
+for improving pressure communication in coarsened aquifer models. Its workflow
+uses OPM Flow, pycopm, plopm, ResInsight, ParaView, and supporting Python and
+shell scripts. It does not invoke the **expreccs** executable.
+
+About the project
+-----------------
+
+.. image:: figs/about.png
+   :alt: Organizations supporting expreccs
+   :align: center
+   :width: 50%
+
+**expreccs** is funded by Harbour Energy, Equinor, Shell, and the Research
+Council of Norway under project number 336294.
+
+See the `project description
+<https://www.norceresearch.no/en/projects/expansion-of-resources-for-co2-storage-on-the-horda-platform-expreccs>`_
+for additional information about the project objectives and partners.
+
+Where to continue
+-----------------
+
+* Complete the :doc:`installation` and verify expreccs and OPM Flow.
+* Use :doc:`configuration_file` to define integrated regional, reference, and
+  site studies.
+* Browse :doc:`examples` for configuration-based, existing-deck,
+  regular-boundary, and irregular-boundary workflows.
+* Review the `2025 publication cases
+  <https://github.com/cssr-tools/expreccs/tree/main/examples/paper_2025>`_ for
+  the research workflows that use the **expreccs** Python tool.
+* Open :doc:`tccs-13` for the related Troll aquifer coarsening and optimization
+  study hosted by the expreccs project. This workflow does not use the
+  **expreccs** executable.
+* Open :doc:`ecmor2026` for the related explicit non-net-cell treatment study
+  hosted by the expreccs project. This workflow does not use the **expreccs**
+  executable.
+* Use :doc:`command-line` for exact CLI options, defaults, and workflow
+  compatibility.
+* Review :doc:`output_folder` for generated preprocessing, simulation,
+  postprocessing, mapping, and boundary-condition files.
+* Browse :doc:`api` for the Python modules, classes, and functions.
+* See :doc:`contributing` to report issues, request features, or contribute to
+  **expreccs**.
+* Explore :doc:`related` for complementary OPM Flow simulation,
+  preprocessing, and visualization tools.

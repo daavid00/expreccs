@@ -1,16 +1,15 @@
-===================
 expreccs Python API
 ===================
 
-The main script for the **expreccs** executable is located in the core folder.
-The expreccss folder contains mako files to generate the corresponding opm
-input decks. The scripts in the utils folder process the input configuration
-file, runs the reference, regional, and site simulations, in addition to include 
-routines to project the pressures for given generic geological models. The scripts in the 
-visualization folder generate images (.png) to show comparisons between the different runs.
+The executable coordinates integrated or existing-deck workflows. Mako templates generate OPM input; utilities process configuration, run reference, regional, and site simulations, and project dynamic boundaries; visualization modules compare results.
 
 .. figure:: figs/contents.png
+   :alt: Files in the expreccs package
+   :width: 65%
 
-    Files in the expreccs package.
+API files are regenerated beneath ``docs/text/api`` before each build.
 
-.. include:: modules.rst
+.. toctree::
+   :maxdepth: 2
+
+   api/modules

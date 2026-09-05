@@ -1,100 +1,306 @@
-*********
-ECMOR2026
-*********
+ECMOR 2026
+==========
 
-Here we describe the steps to reproduce the results in:
+Publication
+-----------
 
-* Landa-Marbán, D., Sandve, T.H., and Gasda, S.E. 2026. Improving pressure communication in coarsened aquifer models for CO2 storage via explicit non-net cell treatment. ECMOR 2026 (to appear by first week of September 2026).
+This page describes how to reproduce the results in:
 
-To this end, we use mainly bash files, while Python scripts are used for more comprehensive tasks.
+* Landa-Marbán, D., Sandve, T. H., and Gasda, S. E. (2026). Improving
+  pressure communication in coarsened aquifer models for CO2 storage via
+  explicit non-net cell treatment. ECMOR 2026.
 
-The core tools for the preprocessing and postprocessings are `pycopm <https://github.com/cssr-tools/pycopm>`_ and `plopm <https://github.com/cssr-tools/plopm>`_, which can be installed by:
+The workflows use Bash scripts for most tasks and Python scripts for the more
+comprehensive processing steps.
 
-.. code-block:: bash
+Prerequisites
+-------------
 
-    pip install git+https://github.com/cssr-tools/pycopm.git
-    pip install git+https://github.com/cssr-tools/plopm.git
+The main preprocessing and postprocessing tools are
+`pycopm <https://github.com/cssr-tools/pycopm>`_ and
+`plopm <https://github.com/cssr-tools/plopm>`_. Install their current
+development versions with:
 
-======
-Method
-======
+.. code-block:: console
 
-Run `figure1.sh <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/method/figure1.sh>`_:
+   pip install git+https://github.com/cssr-tools/pycopm.git
+   pip install git+https://github.com/cssr-tools/plopm.git
 
-.. code-block:: bash
+The Troll workflow also requires OPM Flow. Some figures require PowerPoint,
+ParaView, or ResInsight for manual assembly or screenshots, as described in the
+corresponding sections.
 
-    . ./figure1.sh
+Method: Figure 1
+----------------
+
+Run ``figure1.sh`` from the
+``publications/ecmor2026/method`` directory:
+
+.. code-block:: console
+
+   . ./figure1.sh
 
 .. note::
 
-    PowerPoint is used to put all together the subfigures and add the colorful connections.
+   PowerPoint is used to assemble the subfigures and add the colored
+   connections.
 
-=======
-Results
-=======
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/method/figure1.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View figure1.sh
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/method/figure1.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw figure1.sh
 
 2D synthetic model
 ------------------
 
-Run `figure2.sh <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_2d_synthetic_model/figure2.sh>`_ and `figure3_table1.py <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_2d_synthetic_model/figure3_table1.py>`_:
+Run ``figure2.sh`` and ``figure3_table1.py`` from the
+``publications/ecmor2026/results_2d_synthetic_model`` directory:
 
-.. code-block:: bash
+.. code-block:: console
 
-    . ./figure2.sh
-    python3 figure3_table1.py
+   . ./figure2.sh
+   python3 figure3_table1.py
 
 .. note::
 
-    PowerPoint is used to set the sensor, region, and well in Figure 2.
+   PowerPoint is used to add the sensor, region, and well annotations to
+   Figure 2.
+
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_2d_synthetic_model/figure2.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View figure2.sh
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_2d_synthetic_model/figure2.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw figure2.sh
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_2d_synthetic_model/figure3_table1.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View figure3_table1.py
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_2d_synthetic_model/figure3_table1.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw figure3_table1.py
 
 3D synthetic model
 ------------------
 
-Run `figure4_table2.py <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_3d_synthetic_model/figure4_table2.py>`_:
+Run ``figure4_table2.py`` from the
+``publications/ecmor2026/results_3d_synthetic_model`` directory:
 
-.. code-block:: bash
+.. code-block:: console
 
-    python3 figure4_table2.py
+   python3 figure4_table2.py
 
 .. note::
 
-    The graphics in Figure 4 are generated via screenshots using `ParaView <https://resinsight.org>`_.
+   The graphics in Figure 4 are generated from screenshots using
+   `ParaView <https://www.paraview.org/>`_.
+
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_3d_synthetic_model/figure4_table2.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View figure4_table2.py
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_3d_synthetic_model/figure4_table2.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw figure4_table2.py
 
 Troll aquifer model
 -------------------
 
-To this end, the decks `MODEL.DATA <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results/MODEL.DATA>`_ and
-`FILLED_MODEL.DATA <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results/FILLED_MODEL.DATA>`_ have the 
-same dimensions and number of total cells (12,450,809) as the Troll aquifer model, and the rest of the properties are 
-set to common homogeneous values from literature, while the well locations match the ones described in the ecmor2026 paper.
-Then, you could contact the `Norwegian Offshore Directorate <https://www.sodir.no/en/>`_ to get the actual Troll aquifer model,
-and adapt those files to the ones in the `results_troll folder <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results>`_.
-To get the FILLED_MODEL, using the petrel model provided by the Norwegian Offshore Directorate one can export the non-net cells IDs to FLUXNUM and set those
-values to 0, then EQUALREG can be used to assign the PORO and PERMS in the non-net cells (see the `FILLED_MODEL.DATA <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results/FILLED_MODEL.DATA>`_).
+The ``MODEL.DATA`` and ``FILLED_MODEL.DATA`` decks have the same dimensions and
+total number of cells, 12,450,809, as the Troll aquifer model. Their remaining
+properties use common homogeneous literature values, while the well locations
+match those described in the ECMOR 2026 paper.
+
+The repository does not distribute the actual Troll aquifer model. Contact the
+`Norwegian Offshore Directorate <https://www.sodir.no/en/>`_ to obtain the
+model, then adapt the supplied files in the
+`results_troll/results directory
+<https://github.com/cssr-tools/expreccs/tree/main/publications/ecmor2026/results_troll/results>`_.
+
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results/MODEL.DATA
+         :color: secondary
+         :outline:
+         :expand:
+
+         View MODEL.DATA
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/results/FILLED_MODEL.DATA
+         :color: secondary
+         :outline:
+         :expand:
+
+         View FILLED_MODEL.DATA
 
 .. warning::
 
-    You should not run the MODEL.DATA and FILLED_MODEL.DATA decks before adapting it with the actual Troll aquifer model, since they have a lot of active cells.
+   Do not run ``MODEL.DATA`` or ``FILLED_MODEL.DATA`` before adapting them to
+   the actual Troll aquifer model. The supplied layouts contain many active
+   cells and are not substitutes for the authority-provided model.
 
-First, we generate the results by creating the dual models and running all simulations (`run_results.sh <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/run_results.sh>`_):
+Prepare the filled model
+------------------------
 
-.. code-block:: bash
+Using the Petrel model provided by the Norwegian Offshore Directorate, export
+the non-net cell identifiers to ``FLUXNUM`` and assign those entries a value of
+zero. Then use ``EQUALREG`` to assign ``PORO`` and permeability values in the
+non-net cells. See ``FILLED_MODEL.DATA`` for the implemented keyword pattern.
 
-    . ./run_results.sh
+Run the Troll simulations
+-------------------------
 
-Then, we can obtained Table 3 (`table3.py <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/table3.py>`_):
+Create the dual models and run all simulations with ``run_results.sh`` from the
+``publications/ecmor2026/results_troll`` directory:
 
-.. code-block:: bash
+.. code-block:: console
 
-    python3 table3.py
- 
-Finally, we generate figures 5 to 9 (`figure5-9.sh <https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/figure5-9.sh>`_):
+   . ./run_results.sh
 
-.. code-block:: bash
+.. grid:: 1 1 2 2
+   :gutter: 2
 
-    . ./figure5-9.sh
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/run_results.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View run_results.sh
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_troll/run_results.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw run_results.sh
+
+Generate Table 3
+----------------
+
+Generate Table 3 with ``table3.py``:
+
+.. code-block:: console
+
+   python3 table3.py
+
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/table3.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View table3.py
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_troll/table3.py
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw table3.py
+
+Generate Figures 5 to 9
+-----------------------
+
+Generate Figures 5 to 9 with ``figure5-9.sh``:
+
+.. code-block:: console
+
+   . ./figure5-9.sh
 
 .. note::
 
-    Figures 5c and 5d are generated via screenshots using `ResInsight <https://resinsight.org>`_. PowerPoint is used to set the wells in Figure 7 and to put 
-    together Figure 9 (using the indiviudal generated Figures from plopm (figure9a.png, figure9b.png, and figure9c.png) and using the color bar from to_extract_colorbar_for_figure9.png).
+   Figures 5c and 5d are generated from screenshots using
+   `ResInsight <https://resinsight.org>`_. PowerPoint is used to add the wells
+   in Figure 7 and to assemble Figure 9 from ``figure9a.png``,
+   ``figure9b.png``, and ``figure9c.png``. The color bar is taken from
+   ``to_extract_colorbar_for_figure9.png``.
+
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      .. button-link:: https://github.com/cssr-tools/expreccs/blob/main/publications/ecmor2026/results_troll/figure5-9.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View figure5-9.sh
+
+   .. grid-item::
+
+      .. button-link:: https://raw.githubusercontent.com/cssr-tools/expreccs/main/publications/ecmor2026/results_troll/figure5-9.sh
+         :color: primary
+         :outline:
+         :expand:
+
+         View raw figure5-9.sh

@@ -2,7 +2,13 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R1702
 
-"""Utiliy functions to back-couple from site to regional model"""
+"""Update regional transmissibility multipliers from site-model fluxes.
+
+The back-coupling workflow compares regional and site boundary fluxes, maps
+fine-scale site fluxes to regional cells, writes directional MULT keywords, and
+runs successive regional realizations. Runtime arrays and iteration folders are
+stored in the shared expreccs configuration dictionary.
+"""
 
 import os
 
@@ -14,12 +20,13 @@ from expreccs.visualization.reading import read_fluxes, read_mask
 
 
 def backcoupling(dic):
-    """Function to update regional model based on the
-    site model. A multiplier that compensate for the
-    difference in fluxes are computed
-    MULT[-X, X, -Y , Y] = Flux_site / Flux_regional
-    and added to the regional model. This is done
-    iterativly for number of iterations given in the input"""
+    """Iteratively update regional models using site-to-regional flux multipliers.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     for iteration in range(1, int(dic["iterations"])):
         fil = ""
         if iteration > 1:
@@ -47,7 +54,15 @@ def backcoupling(dic):
 
 
 def write_folder_iter(dic, fil):
-    """Write folders for the _{iteration} models"""
+    """Create preprocessing and simulation folders for one iteration.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    fil : Any
+        Iteration model name or suffix.
+    """
     path_pre = f"{dic['fol']}/preprocessing/{fil}"
     path_sim = f"{dic['fol']}/simulations/{fil}"
     if not os.path.exists(path_pre):
@@ -57,7 +72,13 @@ def write_folder_iter(dic, fil):
 
 
 def init_multipliers(dic):
-    """Initialize input for regional multipliers"""
+    """Initialize directional regional transmissibility multipliers.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     numcells = (
         dic["regional_num_cells"][0]
         * dic["regional_num_cells"][1]
@@ -68,7 +89,15 @@ def init_multipliers(dic):
 
 
 def compute_multipliers(dic, iteration):  # pylint: disable=R1702,R0912,R0914,R0915
-    """Compute multiplier that compensate for the difference in fluxes"""
+    """Compute regional multipliers from regional and site boundary fluxes.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    iteration : Any
+        Iteration suffix or index.
+    """
     dic["folders"] = [dic["fol"]]
     dic["rhog_ref"], dic["sat_thr"] = 1.86843, 1e-2
     dic["quantity"] = ["FLOWATI+", "FLOWATJ+", "FLOWATI-", "FLOWATJ-"]
