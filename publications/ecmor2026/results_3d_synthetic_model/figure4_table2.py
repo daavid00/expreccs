@@ -201,25 +201,25 @@ for start_index in range(0, nsimulations, parallel_runs):
         )
         plopm_command += (
             f"plopm -i configuration_{case_index}/CONFIGURATION_{case_index} "
-            f"-m vtk -v fluxnum -save figure4{letter}_{cases[case_index]} & "
+            f"-m vtk -v fluxnum -fn figure4{letter}_{cases[case_index]} & "
         )
         plopm_command += (
             f"plopm -i 'configuration_{case_index}/CONFIGURATION_{case_index}' "
             "-v 'pressure - 0pressure' -s ',,1:4 ,,1:1' "
-            f"-diff configuration_{case_index}/CONFIGURATION_{case_index}_C "
-            f"-save configuration_{case_index}/standard -m csv & "
+            f"-di configuration_{case_index}/CONFIGURATION_{case_index}_C "
+            f"-fn configuration_{case_index}/standard -m csv & "
         )
         plopm_command += (
             f"plopm -i 'configuration_{case_index}/CONFIGURATION_{case_index}' "
             "-v 'pressure - 0pressure' -s ',,1:4 ,,1:1' "
-            f"-dual 0,1 -diff configuration_{case_index}/CONFIGURATION_{case_index}_D "
-            f"-save configuration_{case_index}/dual -m csv & "
+            f"-dg 0,1 -di configuration_{case_index}/CONFIGURATION_{case_index}_D "
+            f"-fn configuration_{case_index}/dual -m csv & "
         )
         plopm_command += (
             f"plopm -i 'configuration_{case_index}/CONFIGURATION_{case_index}' "
             "-v 'pressure - 0pressure' -s ',,1:4 ,,1:1' "
-            f"-dual 0,1 -diff configuration_{case_index}/CONFIGURATION_{case_index}_DNOVTF "
-            f"-save configuration_{case_index}/dualnovtf -m csv & "
+            f"-dg 0,1 -di configuration_{case_index}/CONFIGURATION_{case_index}_DNOVTF "
+            f"-fn configuration_{case_index}/dualnovtf -m csv & "
         )
 
     run_command(flow_command + "wait")

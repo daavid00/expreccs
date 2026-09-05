@@ -1,0 +1,1062 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expreccs.core.expreccs &#8212; expreccs documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expreccs/core/expreccs';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-05"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="expreccs documentation - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="expreccs documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">expreccs.core.expreccs</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for expreccs.core.expreccs</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023-2026 NORCE Research AS</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0</span>
+<span class="c1"># pylint: disable=R0912,R0914,R0915</span>
+
+<span class="sd">"""Command-line entry point and top-level workflow coordination for expreccs.</span>
+
+<span class="sd">expreccs creates and runs reference, regional, and site-scale OPM Flow models</span>
+<span class="sd">for hierarchical CO2 storage studies. It can also project boundary data between</span>
+<span class="sd">existing regional and site decks, perform iterative back-coupling, and generate</span>
+<span class="sd">comparison figures.</span>
+
+<span class="sd">This module parses and validates command-line arguments, initializes the shared</span>
+<span class="sd">runtime configuration, dispatches the selected modeling workflow, and reports</span>
+<span class="sd">generated outputs. Grid mapping, deck writing, simulation execution, result</span>
+<span class="sd">processing, and plotting are delegated to utility and visualization modules.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.backcoupling</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">backcoupling</span><span class="p">,</span>
+    <span class="n">init_multipliers</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.inputvalues</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_input</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.mapproperties</span><span class="w"> </span><span class="kn">import</span> <span class="n">mapping_properties</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.reg_sit_given_decks</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_deck</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.runs</span><span class="w"> </span><span class="kn">import</span> <span class="n">plotting</span><span class="p">,</span> <span class="n">run_models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.terminal</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">cli_correct_value</span><span class="p">,</span>
+    <span class="n">cli_error_value</span><span class="p">,</span>
+    <span class="n">expreccs_error</span><span class="p">,</span>
+    <span class="n">expreccs_info</span><span class="p">,</span>
+    <span class="n">expreccs_success</span><span class="p">,</span>
+    <span class="n">expreccs_tip</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.writefile</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_folders</span><span class="p">,</span> <span class="n">write_properties</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.visualization.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_results</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../api/expreccs.core.expreccs.html#expreccs.core.expreccs.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Run the expreccs command-line workflow.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : list[str] | None, optional</span>
+<span class="sd">        Arguments to parse instead of ``sys.argv[1:]``.</span>
+<span class="sd">    """</span>
+    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">cmdargs</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">check_cmdargs</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"fol"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">output</span><span class="p">)}</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"pat"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">],</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"plot"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">plot</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"rotate"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"explicit"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">explicit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"zones"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">zones</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"freq"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">frequency</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"subfolders"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">subfolders</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"nonregular"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cmdargs</span><span class="o">.</span><span class="n">nonregular</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"acoeff"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">acoeff</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"boundaries"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">boundaries</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)]</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"compare"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">compare</span>
+
+    <span class="k">if</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"compare"</span><span class="p">]:</span>
+        <span class="n">expreccs_info</span><span class="p">(</span><span class="s2">"processing the comparison, please wait..."</span><span class="p">)</span>
+        <span class="n">dic</span><span class="p">[</span><span class="s2">"iterations"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">plot_results</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="n">expreccs_success</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/compare"</span><span class="p">,</span> <span class="p">[</span><span class="s2">""</span><span class="p">])</span>
+        <span class="k">return</span>
+
+    <span class="n">expreccs_info</span><span class="p">(</span><span class="s2">"executing expreccs, please wait..."</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">"reg"</span><span class="p">,</span> <span class="s2">"sit"</span><span class="p">]):</span>
+            <span class="n">dic</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"f</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"/"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="s2">"/"</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">create_deck</span><span class="p">(</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"fol"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"explicit"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"zones"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"freq"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"nonregular"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"acoeff"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"boundaries"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"reg"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"freg"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"sit"</span><span class="p">],</span>
+            <span class="n">dic</span><span class="p">[</span><span class="s2">"fsit"</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">expreccs_success</span><span class="p">(</span><span class="s2">"generated files written to "</span><span class="p">,</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"fol"</span><span class="p">],</span> <span class="p">[</span><span class="s2">""</span><span class="p">])</span>
+        <span class="k">return</span>
+
+    <span class="n">process_input</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">dic</span><span class="p">[</span><span class="s2">"fpos"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/postprocessing/"</span> <span class="k">if</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"subfolders"</span><span class="p">]</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/"</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"iterations"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">fil</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">iteration</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"reference"</span><span class="p">,</span> <span class="s2">"regional"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"site_</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'site_bctype'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"subfolders"</span><span class="p">]:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"fpre</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/preprocessing/</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">/"</span>
+                <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"fsim</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/simulations/</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">/"</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"fpre</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">"</span><span class="p">],</span> <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"fsim</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">fil</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'fol'</span><span class="p">]</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="n">write_folders</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"fol"</span><span class="p">])</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mapping_properties</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="n">write_properties</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+        <span class="n">init_multipliers</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+        <span class="n">run_models</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"iterations"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"none"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"subfolders"</span><span class="p">]:</span>
+                <span class="n">expreccs_error</span><span class="p">(</span>
+                    <span class="s2">"invalid combination, backcoupling requires "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_correct_value</span><span class="p">(</span><span class="s1">'-s 1'</span><span class="p">)</span><span class="si">}</span><span class="s2"> and cannot be used with "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-s 0'</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span>
+            <span class="n">backcoupling</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"plot"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"no"</span><span class="p">:</span>
+            <span class="n">latex_available</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">"latex"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">latex_available</span><span class="p">:</span>
+                <span class="n">expreccs_tip</span><span class="p">(</span>
+                    <span class="s2">"LaTeX is recommended for figures to use the intended fonts and "</span>
+                    <span class="s2">"formats. Follow the installation instructions in the expreccs "</span>
+                    <span class="s2">"documentation."</span>
+                <span class="p">)</span>
+            <span class="n">plotting</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+        <span class="n">expreccs_success</span><span class="p">(</span><span class="s2">"generated files written to "</span><span class="p">,</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"fol"</span><span class="p">],</span> <span class="p">[</span><span class="s2">""</span><span class="p">])</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parse_args">
+<a class="viewcode-back" href="../../../api/expreccs.core.expreccs.html#expreccs.core.expreccs.parse_args">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create the CLI parser and parse expreccs arguments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    argv : list[str] | None, optional</span>
+<span class="sd">        Arguments to parse instead of ``sys.argv[1:]``.</span>
+<span class="sd">    """</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Main method to simulate regional and site reservoirs for CO2 storage. "</span>
+        <span class="s2">"The valid flags for toml configuration files are -i, -o, -m, -c, -p, -u, -r, -t, "</span>
+        <span class="s2">"-w, -l. The valid flags for paths to the regional and site folders are -i, -o, -b, "</span>
+        <span class="s2">"-f, -a, -w, -e, -z, -n"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-i"</span><span class="p">,</span>
+        <span class="s2">"--input"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"input.toml"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The base name of the configuration file; or paths (space between them and "</span>
+        <span class="s2">"quotation marks) to the regional and site models"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-o"</span><span class="p">,</span>
+        <span class="s2">"--output"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"output"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The base name of the output folder"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-m"</span><span class="p">,</span>
+        <span class="s2">"--mode"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">,</span> <span class="s2">"site"</span><span class="p">,</span> <span class="s2">"regional"</span><span class="p">,</span> <span class="s2">"regional_site"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"none"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Parts of expreccs to run"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-c"</span><span class="p">,</span>
+        <span class="s2">"--compare"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"compare"</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Generate a common plot for the current folders"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-p"</span><span class="p">,</span>
+        <span class="s2">"--plot"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">,</span> <span class="s2">"site"</span><span class="p">,</span> <span class="s2">"regional"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"no"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"no"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Plots to generate"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-t"</span><span class="p">,</span>
+        <span class="s2">"--transform"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"0"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Grades to rotate the site geological model"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-b"</span><span class="p">,</span>
+        <span class="s2">"--boundaries"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"[0,0,0,0]"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Set the number of entries to skip the bc projections on "</span>
+        <span class="s2">"the site, where 'j=0,i=nx-1,j=ny-1,i=0', e.g., '[0,2,0,0]' would skip all cells "</span>
+        <span class="s2">"with i=nx-1 and i=nx-2; this becomes handly for models where all cells in a "</span>
+        <span class="s2">"given site are inactive along a side. Set an entry to -1 to skip the whole "</span>
+        <span class="s2">"boundary"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-f"</span><span class="p">,</span>
+        <span class="s2">"--frequency"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"1"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Frequency to evaluate the boundary pressures on the site between "</span>
+        <span class="s2">"report steps in the site. Write an array, e.g., '2,7,3', to set the "</span>
+        <span class="s2">"frequency in each site report step"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-a"</span><span class="p">,</span>
+        <span class="s2">"--acoeff"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"3.2"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Exponential 'a' coefficient for the telescopic time-discretization "</span>
+        <span class="s2">"for the given frequency '-f'. Write an array, e.g., '2.2,0,3.1', to set "</span>
+        <span class="s2">"the coefficient in each site report step ('3.2' by default, use 0 for an "</span>
+        <span class="s2">"equidistance partition)."</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-e"</span><span class="p">,</span>
+        <span class="s2">"--explicit"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"1"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Set to '0' to write the pressure increase on the site bc from "</span>
+        <span class="s2">"the regional values ('1': the pressure values on the "</span>
+        <span class="s2">"boundaries correspond to the explicit values on the regional simulations)."</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-z"</span><span class="p">,</span>
+        <span class="s2">"--zones"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"0"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Set to '1' to project the regional pressures per fipnum zones, i.e., "</span>
+        <span class="s2">"the pressure maps to the site bcs are written for equal fipnum numbers in "</span>
+        <span class="s2">"the whole xy layer ('0': the projections include the z "</span>
+        <span class="s2">"location offset between regional and site models)."</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-s"</span><span class="p">,</span>
+        <span class="s2">"--subfolders"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"1"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Set to '0' to not create the subfolders preprocessing, output, and "</span>
+        <span class="s2">"postprocessing, i.e., to write all generated files in the output directory"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"-n"</span><span class="p">,</span>
+        <span class="s2">"--nonregular"</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"0"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Set to '1' for a site with irregular contour, i.e., not defined in a "</span>
+        <span class="s2">"rectangle"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_cmdargs">
+<a class="viewcode-back" href="../../../api/expreccs.core.expreccs.html#expreccs.core.expreccs.check_cmdargs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_cmdargs</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Validate command-line values and incompatible operations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cmdargs : argparse.Namespace</span>
+<span class="sd">        Parsed command-line arguments.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    SystemExit</span>
+<span class="sd">        If an input value is invalid or required input cannot be used.</span>
+<span class="sd">    """</span>
+    <span class="n">input_value</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">input</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_value</span><span class="p">:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-i'</span><span class="p">)</span><span class="si">}</span><span class="s2">, the input cannot be empty."</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-o'</span><span class="p">)</span><span class="si">}</span><span class="s2">, the output folder cannot be empty."</span>
+        <span class="p">)</span>
+
+    <span class="n">input_paths</span> <span class="o">=</span> <span class="n">input_value</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_paths</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-i </span><span class="si">{</span><span class="n">input_value</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected one "</span>
+            <span class="s2">"configuration file or two model-folder paths separated by a space."</span>
+        <span class="p">)</span>
+
+    <span class="n">configuration_input</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">folder_input</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">configuration_input</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">input_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".toml"</span><span class="p">):</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid extension </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-i </span><span class="si">{</span><span class="n">input_value</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, the valid "</span>
+            <span class="sa">f</span><span class="s2">"extension is </span><span class="si">{</span><span class="n">cli_correct_value</span><span class="p">(</span><span class="s1">'.toml'</span><span class="p">)</span><span class="si">}</span><span class="s2">, or provide paths to the "</span>
+            <span class="s2">"regional and site model folders."</span>
+        <span class="p">)</span>
+
+    <span class="n">transform</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">transform</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">transform_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">transform_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">transform_value</span><span class="p">):</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-t </span><span class="si">{</span><span class="n">transform</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected a finite "</span>
+            <span class="s2">"number of degrees."</span>
+        <span class="p">)</span>
+
+    <span class="n">boundaries</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">boundaries</span>
+    <span class="n">boundary_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">"\[\s*-?\d+\s*,\s*-?\d+\s*,\s*-?\d+\s*,\s*-?\d+\s*\]"</span><span class="p">,</span>
+        <span class="n">boundaries</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">boundary_pattern</span><span class="p">:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-b </span><span class="si">{</span><span class="n">boundaries</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected four "</span>
+            <span class="s2">"integers inside brackets, "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_correct_value</span><span class="p">(</span><span class="s1">'e.g., -b [0,2,0,0]'</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+
+    <span class="n">boundary_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">boundaries</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">boundary_values</span><span class="p">):</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-b </span><span class="si">{</span><span class="n">boundaries</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, boundary entries "</span>
+            <span class="s2">"must be -1 or non-negative integers."</span>
+        <span class="p">)</span>
+
+    <span class="n">frequency</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">frequency</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">"[1-9]\d*(?:\s*,\s*[1-9]\d*)*"</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-f </span><span class="si">{</span><span class="n">frequency</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected positive "</span>
+            <span class="s2">"integers separated by commas."</span>
+        <span class="p">)</span>
+
+    <span class="n">frequency_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">frequency</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)]</span>
+
+    <span class="n">acoeff</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">acoeff</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">acoeff_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">acoeff</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)]</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">acoeff_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">acoeff_values</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">acoeff_values</span>
+    <span class="p">):</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-a </span><span class="si">{</span><span class="n">acoeff</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected non-negative "</span>
+            <span class="s2">"finite numbers separated by commas."</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">acoeff_values</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequency_values</span><span class="p">)]:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"invalid value </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="sa">f</span><span class="s1">'-a </span><span class="si">{</span><span class="n">acoeff</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">, expected one "</span>
+            <span class="s2">"coefficient or one coefficient for each value provided with "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_correct_value</span><span class="p">(</span><span class="s1">'-f'</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+
+    <span class="n">compare</span> <span class="o">=</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">compare</span>
+    <span class="k">if</span> <span class="n">compare</span><span class="p">:</span>
+        <span class="n">compare_options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"-i"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"input"</span><span class="p">,</span> <span class="s2">"input.toml"</span><span class="p">),</span>
+            <span class="s2">"-m"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mode"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">),</span>
+            <span class="s2">"-p"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"plot"</span><span class="p">,</span> <span class="s2">"no"</span><span class="p">),</span>
+            <span class="s2">"-t"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+            <span class="s2">"-b"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"boundaries"</span><span class="p">,</span> <span class="s2">"[0,0,0,0]"</span><span class="p">),</span>
+            <span class="s2">"-f"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+            <span class="s2">"-a"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"acoeff"</span><span class="p">,</span> <span class="s2">"3.2"</span><span class="p">),</span>
+            <span class="s2">"-e"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"explicit"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+            <span class="s2">"-z"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"zones"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+            <span class="s2">"-n"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"nonregular"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">invalid_options</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">option</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span> <span class="ow">in</span> <span class="n">compare_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">!=</span> <span class="n">default</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">invalid_options</span><span class="p">:</span>
+            <span class="n">expreccs_error</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"invalid combination, </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-c compare'</span><span class="p">)</span><span class="si">}</span><span class="s2"> runs the "</span>
+                <span class="s2">"standalone comparison workflow and cannot be combined with "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">invalid_options</span><span class="p">))</span><span class="si">}</span><span class="s2">."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">subfolders</span> <span class="o">!=</span> <span class="s2">"1"</span><span class="p">:</span>
+            <span class="n">expreccs_error</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"invalid combination, </span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-c compare'</span><span class="p">)</span><span class="si">}</span><span class="s2"> requires the "</span>
+                <span class="s2">"subfolder structure and cannot be used with "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-s 0'</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">folder_input</span><span class="p">:</span>
+        <span class="n">configuration_options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"-m"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mode"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">),</span>
+            <span class="s2">"-p"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"plot"</span><span class="p">,</span> <span class="s2">"no"</span><span class="p">),</span>
+            <span class="s2">"-t"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+            <span class="s2">"-s"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"subfolders"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">invalid_options</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">option</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span> <span class="ow">in</span> <span class="n">configuration_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">!=</span> <span class="n">default</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">invalid_options</span><span class="p">:</span>
+            <span class="n">expreccs_error</span><span class="p">(</span>
+                <span class="s2">"invalid option when providing regional and site model folders; this "</span>
+                <span class="s2">"workflow cannot be combined with "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">invalid_options</span><span class="p">))</span><span class="si">}</span><span class="s2">."</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">configuration_input</span><span class="p">:</span>
+        <span class="n">folder_options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"-b"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"boundaries"</span><span class="p">,</span> <span class="s2">"[0,0,0,0]"</span><span class="p">),</span>
+            <span class="s2">"-f"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+            <span class="s2">"-a"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"acoeff"</span><span class="p">,</span> <span class="s2">"3.2"</span><span class="p">),</span>
+            <span class="s2">"-e"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"explicit"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+            <span class="s2">"-z"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"zones"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+            <span class="s2">"-n"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"nonregular"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">invalid_options</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">option</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span> <span class="ow">in</span> <span class="n">folder_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cmdargs</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">!=</span> <span class="n">default</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">invalid_options</span><span class="p">:</span>
+            <span class="n">expreccs_error</span><span class="p">(</span>
+                <span class="s2">"invalid option for a TOML configuration file; options "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">invalid_options</span><span class="p">))</span><span class="si">}</span><span class="s2"> can only be used when "</span>
+                <span class="s2">"providing regional and site model folders."</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">plot</span> <span class="o">!=</span> <span class="s2">"no"</span> <span class="ow">and</span> <span class="n">cmdargs</span><span class="o">.</span><span class="n">subfolders</span> <span class="o">!=</span> <span class="s2">"1"</span><span class="p">:</span>
+        <span class="n">expreccs_error</span><span class="p">(</span>
+            <span class="s2">"invalid combination, plot generation requires the subfolder structure "</span>
+            <span class="s2">"and cannot be used with "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cli_error_value</span><span class="p">(</span><span class="s1">'-s 0'</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -134,29 +134,21 @@ dmypy.json
 # MacOS
 .DS_Store
 
-# DUNE
-dune-common/
-dune-geometry/
-dune-grid/
-dune-istl/
-
-# The OPM
-opm-common/
-opm-grid/
-opm-models/
-opm-simulators/
+# OPM
+dune-*
+opm-*
 
 # Extra folders
-examples/hello_world
-developing
-playground
-presentation
-debugging
-vexpreccs
-workshop
-cssr
-test_outputs
+/examples/hello_world
+/developing
+/playground
+/presentation
+/debugging
+/vexpreccs
+/workshop
+/cssr
+/test_outputs
 
 # Extra files
-regional_rpr-3.png
-reference_sgas_i,j,1_t90.png
+/regional_rpr-3.png
+/reference_sgas_i,j,1_t90.png

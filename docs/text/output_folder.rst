@@ -1,15 +1,15 @@
-*************
 Output folder
-*************
+=============
 
 =======================
 Via configuration files
 =======================
 
 The following screenshot shows the generated files in the selected output folder after 
-executing **expreccs** in the :ref:`hello_world` example.
+executing **expreccs** in the :doc:`Hello World example <examples/hello-world>` example.
 
 .. figure:: figs/output.png
+    :width: 70%
 
     Generated files after executing **expreccs**.
 
@@ -31,16 +31,17 @@ Via OPM Flow decks
 ==================
 
 The following screenshot shows the generated files in the selected output folder after 
-executing **expreccs**, this corresponds to the `test_generic_deck.py <https://github.com/cssr-tools/expreccs/blob/main/tests/test_generic_deck.py>`_:
+executing **expreccs**, this corresponds to the `test_2_generic_deck.py <https://github.com/cssr-tools/expreccs/blob/main/tests/test_2_generic_deck.py>`_:
 
 .. code-block:: bash
 
     expreccs -o expreccs -i 'regional/REGIONAL site_closed/SITE_CLOSED'
 
 .. figure:: figs/generic.png
+    :width: 70%
 
     Generated files after executing **expreccs**.
 
 The dynamic boundary conditions are saved in the expreccs/bc folder, and the definition of the boundary connections in 
-expreccs/BCCON.INC. In addition, OPERNUM is used to label de boundary cells in the site, and also to label the overlapping cells and
+expreccs/BCCON.INC. In addition, OPERNUM is used to label the boundary cells in the site, and also to label the overlapping cells and
 cells to use for the pressure interpolator in the regional model (regional/OPERNUM_EXPRECCS.INC).

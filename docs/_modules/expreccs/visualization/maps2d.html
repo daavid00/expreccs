@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expreccs.visualization.maps2d &#8212; expreccs documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=530fd138" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../_static/documentation_options.js?v=1485e655"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=eef4a3d2"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expreccs/visualization/maps2d';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10rc0" />
+    <meta name="docbuild:last-update" content="2026-09-05"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="expreccs documentation - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="expreccs documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../configuration_file.html">
+    Configuration reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tccs-13.html">
+    TCCS-13
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../ecmor2026.html">
+    ECMOR 2026
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../command-line.html">
+    Command-line reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    expreccs Python API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../output_folder.html">
+    Output folder
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../related.html">
+    Related projects
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs/issues/new/choose" title="Report an issue" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-bug fa-lg" aria-hidden="true"></i><span class="visually-hidden">Report an issue</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cssr-tools/expreccs" title="GitHub repository" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub repository</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">expreccs.visualization.maps2d</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for expreccs.visualization.maps2d</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023-2026 NORCE Research AS</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0</span>
+<span class="c1"># pylint: disable=E1102,R0913,R0914,R0917</span>
+
+<span class="sd">"""Generate two-dimensional maps for expreccs simulation results.</span>
+
+<span class="sd">The module reshapes active-cell arrays onto top-surface grids and writes final</span>
+<span class="sd">state, geological, and reference-to-site difference maps with consistent axes,</span>
+<span class="sd">color scales, labels, and progress reporting.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">nullcontext</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">alive_progress</span><span class="w"> </span><span class="kn">import</span> <span class="n">alive_bar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_axes_locatable</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">expreccs.utils.terminal</span><span class="w"> </span><span class="kn">import</span> <span class="n">expreccs_info</span>
+
+
+<div class="viewcode-block" id="reshape_to_2d">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.reshape_to_2d">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reshape_to_2d</span><span class="p">(</span><span class="n">array_1d</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Reshape a flat cell array onto a two-dimensional grid.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array_1d : Any</span>
+<span class="sd">        Flat cell-data array.</span>
+<span class="sd">    nx : Any</span>
+<span class="sd">        Number of cells in the x direction.</span>
+<span class="sd">    ny : Any</span>
+<span class="sd">        Number of cells in the y direction.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        Array reshaped to ``(ny, nx)`` with reversed rows.</span>
+<span class="sd">    """</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">nx</span> <span class="o">*</span> <span class="n">ny</span>
+
+    <span class="k">if</span> <span class="n">array_1d</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">expected</span><span class="p">:</span>
+        <span class="n">array_1d</span> <span class="o">=</span> <span class="n">array_1d</span><span class="p">[:</span><span class="n">expected</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">array_1d</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span></div>
+
+
+
+<div class="viewcode-block" id="plot_map">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.plot_map">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_map</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">,</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">xticks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">yticks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">difference</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Write one two-dimensional field map.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : Any</span>
+<span class="sd">        X coordinates.</span>
+<span class="sd">    y : Any</span>
+<span class="sd">        Y coordinates.</span>
+<span class="sd">    data : Any</span>
+<span class="sd">        Values to plot.</span>
+<span class="sd">    title : Any</span>
+<span class="sd">        Figure title.</span>
+<span class="sd">    filename : Any</span>
+<span class="sd">        Output filename.</span>
+<span class="sd">    cmap : Any</span>
+<span class="sd">        Matplotlib colormap.</span>
+<span class="sd">    units : Any, optional</span>
+<span class="sd">        Colorbar label.</span>
+<span class="sd">    xticks : Any, optional</span>
+<span class="sd">        Whether to show x-axis ticks.</span>
+<span class="sd">    yticks : Any, optional</span>
+<span class="sd">        Whether to show y-axis ticks.</span>
+<span class="sd">    show_colorbar : Any, optional</span>
+<span class="sd">        Whether to draw a colorbar.</span>
+<span class="sd">    difference : Any, optional</span>
+<span class="sd">        Whether to use symmetric difference limits.</span>
+<span class="sd">    """</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">imag</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">,</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s2">"flat"</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">axis</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"scaled"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">xticks</span><span class="p">:</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+
+    <span class="k">if</span> <span class="n">yticks</span><span class="p">:</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Easting [km]"</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Northing [km]"</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_colorbar</span><span class="p">:</span>
+        <span class="n">maxp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">minp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">difference</span> <span class="ow">and</span> <span class="n">minp</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">maxp</span><span class="p">:</span>
+            <span class="n">bnd</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">maxp</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">minp</span><span class="p">))</span>
+            <span class="n">maxp</span> <span class="o">=</span> <span class="n">bnd</span>
+            <span class="n">minp</span> <span class="o">=</span> <span class="o">-</span><span class="n">bnd</span>
+
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"5%"</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+        <span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">minp</span><span class="p">,</span> <span class="n">maxp</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span>
+            <span class="n">imag</span><span class="p">,</span>
+            <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">,</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s2">"vertical"</span><span class="p">,</span>
+            <span class="n">ticks</span><span class="o">=</span><span class="n">ticks</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">imag</span><span class="o">.</span><span class="n">set_clim</span><span class="p">(</span><span class="n">minp</span><span class="p">,</span> <span class="n">maxp</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="model_group">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.model_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_group</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Resolve a model name to its geometry group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    res : Any</span>
+<span class="sd">        Reservoir case name.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Normalized geometry-group name.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="s2">"regional"</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"regional"</span>
+    <span class="k">if</span> <span class="s2">"site"</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"site"</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+
+<div class="viewcode-block" id="final_time_maps">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.final_time_maps">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">final_time_maps</span><span class="p">(</span><span class="n">dic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Plot final-time fields for all selected reservoirs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dic : Any</span>
+<span class="sd">        Shared mutable expreccs configuration and runtime data.</span>
+<span class="sd">    """</span>
+    <span class="n">expreccs_info</span><span class="p">(</span><span class="s2">"final time 2d maps:"</span><span class="p">)</span>
+
+    <span class="n">show_progress</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">isatty</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">alive_bar</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"tot"</span><span class="p">],</span> <span class="n">bar</span><span class="o">=</span><span class="s2">"fish"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">nullcontext</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">bar_ctx</span> <span class="k">as</span> <span class="n">bar_animation</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">nfol</span><span class="p">,</span> <span class="n">fol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"folders"</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"decks"</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+                    <span class="n">bar_animation</span><span class="p">()</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">model_group</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+                <span class="n">nx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"xmx"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">ny</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"ymy"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+                <span class="n">x</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"xcor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"ycor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">]):</span>
+
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">reshape_to_2d</span><span class="p">(</span>
+                        <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">_array"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">nx</span><span class="p">,</span>
+                        <span class="n">ny</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                    <span class="n">title</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"l</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">" (</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'lfolders'</span><span class="p">][</span><span class="n">nfol</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span>
+
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'where'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}{</span><span class="n">res</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'names'</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">.png"</span>
+
+                    <span class="n">plot_map</span><span class="p">(</span>
+                        <span class="n">x</span><span class="p">,</span>
+                        <span class="n">y</span><span class="p">,</span>
+                        <span class="n">data</span><span class="p">,</span>
+                        <span class="n">title</span><span class="p">,</span>
+                        <span class="n">filename</span><span class="p">,</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="n">dic</span><span class="p">[</span><span class="s2">"cmaps"</span><span class="p">][</span><span class="n">j</span><span class="p">],</span>
+                        <span class="n">units</span><span class="o">=</span><span class="n">dic</span><span class="p">[</span><span class="s2">"units"</span><span class="p">][</span><span class="n">j</span><span class="p">],</span>
+                    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="final_time_maps_difference">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.final_time_maps_difference">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">final_time_maps_difference</span><span class="p">(</span><span class="n">dic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Plot final-time differences between reference and site models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dic : Any</span>
+<span class="sd">        Shared mutable expreccs configuration and runtime data.</span>
+<span class="sd">    """</span>
+    <span class="n">expreccs_info</span><span class="p">(</span><span class="s2">"final time 2d maps difference:"</span><span class="p">)</span>
+    <span class="n">show_progress</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">isatty</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">alive_bar</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"tod"</span><span class="p">],</span> <span class="n">bar</span><span class="o">=</span><span class="s2">"fish"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">nullcontext</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">bar_ctx</span> <span class="k">as</span> <span class="n">bar_animation</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fol</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"folders"</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"sites"</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+                    <span class="n">bar_animation</span><span class="p">()</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">model_group</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+                <span class="n">nx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"site"</span><span class="p">][</span><span class="s2">"xmx"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">ny</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"site"</span><span class="p">][</span><span class="s2">"ymy"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+                <span class="n">x</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"xcor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"ycor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"quantity"</span><span class="p">]):</span>
+
+                    <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"reference"</span><span class="p">][</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">_array"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span>
+                            <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"reference"</span><span class="p">][</span><span class="s2">"fipn"</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span>
+                        <span class="p">]</span>
+                        <span class="o">-</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">_array"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"FLOWATI+"</span><span class="p">,</span> <span class="s2">"FLOGASI+"</span><span class="p">]:</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+                            <span class="n">diff</span><span class="p">[(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+                    <span class="k">if</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"FLOWATJ+"</span><span class="p">,</span> <span class="s2">"FLOGASJ+"</span><span class="p">]:</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+                            <span class="n">diff</span><span class="p">[(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nx</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">reshape_to_2d</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+
+                    <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+                    <span class="n">title</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="sa">r</span><span class="s2">"SITE $\sum$|REF-"</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s1">'l</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">"|=</span><span class="si">{</span><span class="n">magnitude</span><span class="si">:</span><span class="s2">.2E</span><span class="si">}</span><span class="s2">"</span>
+                    <span class="p">)</span>
+
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'where'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">difference_</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'names'</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">.png"</span>
+
+                    <span class="n">plot_map</span><span class="p">(</span>
+                        <span class="n">x</span><span class="p">,</span>
+                        <span class="n">y</span><span class="p">,</span>
+                        <span class="n">data</span><span class="p">,</span>
+                        <span class="n">title</span><span class="p">,</span>
+                        <span class="n">filename</span><span class="p">,</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="s2">"seismic"</span><span class="p">,</span>
+                        <span class="n">units</span><span class="o">=</span><span class="n">dic</span><span class="p">[</span><span class="s2">"units"</span><span class="p">][</span><span class="n">j</span><span class="p">],</span>
+                        <span class="n">difference</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="geological_maps">
+<a class="viewcode-back" href="../../../api/expreccs.visualization.maps2d.html#expreccs.visualization.maps2d.geological_maps">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">geological_maps</span><span class="p">(</span><span class="n">dic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Plot static geological properties for selected reservoirs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dic : Any</span>
+<span class="sd">        Shared mutable expreccs configuration and runtime data.</span>
+<span class="sd">    """</span>
+    <span class="n">expreccs_info</span><span class="p">(</span><span class="s2">"static 2d maps:"</span><span class="p">)</span>
+    <span class="n">show_progress</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">isatty</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">alive_bar</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="s2">"tot"</span><span class="p">],</span> <span class="n">bar</span><span class="o">=</span><span class="s2">"fish"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bar_ctx</span> <span class="o">=</span> <span class="n">nullcontext</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">bar_ctx</span> <span class="k">as</span> <span class="n">bar_animation</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fol</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"folders"</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="s2">"decks"</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+                    <span class="n">bar_animation</span><span class="p">()</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">model_group</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+                <span class="n">nx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"xmx"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">ny</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"ymy"</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+                <span class="n">x</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"xcor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"ycor"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span>
+
+                <span class="k">for</span> <span class="n">quan</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="s2">"static"</span><span class="p">]:</span>
+
+                    <span class="k">if</span> <span class="n">quan</span> <span class="o">==</span> <span class="s2">"fipn"</span> <span class="ow">and</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="s2">"sensorijk"</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="n">quan</span><span class="p">][</span>
+                            <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="s2">"sensorijk"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="s2">"sensorijk"</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">nx</span>
+                        <span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">reshape_to_2d</span><span class="p">(</span>
+                        <span class="n">dic</span><span class="p">[</span><span class="n">fol</span><span class="p">][</span><span class="n">res</span><span class="p">][</span><span class="n">quan</span><span class="p">],</span>
+                        <span class="n">nx</span><span class="p">,</span>
+                        <span class="n">ny</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">quan</span> <span class="o">==</span> <span class="s2">"fipn"</span><span class="p">:</span>
+                        <span class="n">cmap</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"gray"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">])</span>
+                        <span class="n">title</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"l</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" (site in red, sensor in blue)"</span>
+                        <span class="n">show_cb</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">cmap</span> <span class="o">=</span> <span class="s2">"jet"</span>
+                        <span class="n">title</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="sa">f</span><span class="s2">"l</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">quan</span><span class="si">}</span><span class="s2">"</span>
+                        <span class="n">show_cb</span> <span class="o">=</span> <span class="kc">True</span>
+
+                    <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'where'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dic</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}{</span><span class="n">res</span><span class="si">}</span><span class="s2">_"</span>
+                        <span class="o">+</span> <span class="p">(</span><span class="s2">"fipnum_sensor"</span> <span class="k">if</span> <span class="n">quan</span> <span class="o">==</span> <span class="s2">"fipn"</span> <span class="k">else</span> <span class="n">quan</span><span class="p">)</span>
+                        <span class="o">+</span> <span class="s2">".png"</span>
+                    <span class="p">)</span>
+
+                    <span class="n">plot_map</span><span class="p">(</span>
+                        <span class="n">x</span><span class="p">,</span>
+                        <span class="n">y</span><span class="p">,</span>
+                        <span class="n">data</span><span class="p">,</span>
+                        <span class="n">title</span><span class="p">,</span>
+                        <span class="n">filename</span><span class="p">,</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+                        <span class="n">units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">xticks</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">yticks</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">show_colorbar</span><span class="o">=</span><span class="n">show_cb</span><span class="p">,</span>
+                    <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023-2026, NORCE Research AS.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

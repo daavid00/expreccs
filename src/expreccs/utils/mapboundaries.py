@@ -2,7 +2,13 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=C0302,R0912,R0914,R0915,E1102
 
-"""Utiliy script for mapping to the site boundaries"""
+"""Map regional pore volume, pressure, and flux data to site boundaries.
+
+The module locates regional cells surrounding the site, constructs pressure
+stencils, applies vertical pressure corrections, and interpolates boundary data
+onto the site schedule. It supports pore-volume, flux, pressure, and two-point
+pressure boundary formulations.
+"""
 
 import math as mt
 
@@ -14,9 +20,17 @@ from scipy.interpolate import RegularGridInterpolator, interp1d
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
+from expreccs.utils.terminal import expreccs_info
+
 
 def porv_regional_segmentation(dic):
-    """Locate the different sides for the pv projections"""
+    """Assign regional cells to pore-volume projection regions.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["regional_opernum"] = []
 
     poly2 = Polygon(
@@ -105,7 +119,13 @@ def porv_regional_segmentation(dic):
 
 
 def porv_projections(dic):
-    """Project the pore volumes from the regional to the site"""
+    """Compute site-side pore volumes from regional projection regions.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     case = f"{dic['fol']}/simulations/regional/REGIONAL"
     ini = OpmFile(case + ".INIT")
     porv = np.array(ini["PORV"])
@@ -136,7 +156,15 @@ def porv_projections(dic):
 
 
 def aquaflux(dic, iteration=""):
-    """Read the fluxes and pressures from the regional"""
+    """Read regional restart data and prepare site boundary values.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    iteration : Any, optional
+        Iteration suffix or index.
+    """
     case = f"{dic['fol']}/simulations/regional/REGIONAL"
     ini = OpmFile(case + ".INIT")
     dic["porvr"] = np.array(ini["PORV"])
@@ -219,7 +247,7 @@ def aquaflux(dic, iteration=""):
     zsize = dic["regional_zmz_dsize"]
     nx_reg = dic["regional_num_cells"][0]
 
-    print("Handle boundary conditions:")
+    expreccs_info("Handle boundary conditions:")
     with alive_bar(len(dic["schedule_r"])) as bar_animation:
         for i in range(len(dic["schedule_r"])):
             bar_animation()
@@ -263,7 +291,13 @@ def aquaflux(dic, iteration=""):
 
 
 def handle_pressure_correction(dic):
-    """Correct for the REG pres to the SITE on the z dir if refinement"""
+    """Correct mapped boundary pressures for vertical offsets.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     for i in range(len(dic["schedule_r"])):
         for k, z_p in enumerate(dic["site_zmz_mid"]):
             zmap = dic["site_zmaps"][k]
@@ -292,7 +326,13 @@ def handle_pressure_correction(dic):
 
 
 def cache_grid_coordinates(dic):
-    """Precompute xyz centers only for needed indices"""
+    """Cache centers for regional cells used by boundary stencils.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     grid = dic["grid"]
     ijkfun = grid.ijk_from_global_index
     xyzfun = grid.xyz_from_ijk
@@ -314,7 +354,15 @@ def cache_grid_coordinates(dic):
 
 
 def handle_stencil(dic, i):
-    """Project the cell pressures to the cell faces"""
+    """Interpolate regional cell values onto site boundary faces.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    i : Any
+        Index of the current quantity, boundary, or report step.
+    """
     dic["ncellsh"] = mt.floor(len(dic["cells_bottom"]) / dic["regional_num_cells"][2])
     dic["xc"] = np.linspace(
         dic["site_location"][0], dic["site_location"][3], dic["site_num_cells"][0] + 1
@@ -425,7 +473,13 @@ def handle_stencil(dic, i):
 
 
 def temporal_interpolation_pressure(dic):
-    """Interpolate the BC pressure values in time"""
+    """Interpolate mapped boundary pressures onto the site schedule.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     keywords = ["PRESSURE_bottom", "PRESSURE_top", "PRESSURE_right", "PRESSURE_left"]
     schedule_r, schedule_s = dic["schedule_r"], dic["schedule_s"]
 
@@ -450,7 +504,13 @@ def temporal_interpolation_pressure(dic):
 
 
 def temporal_interpolation_flux(dic):
-    """Interpolate the BC fluxes values in time"""
+    """Interpolate mapped boundary fluxes onto the site schedule.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     keywords = ["AQUFLUX_bottom", "AQUFLUX_top", "AQUFLUX_right", "AQUFLUX_left"]
     schedule_r, schedule_s = dic["schedule_r"], dic["schedule_s"]
 
@@ -475,7 +535,15 @@ def temporal_interpolation_flux(dic):
 
 
 def handle_stencil_2p(dic, i):
-    """Project the cell pressures to the cell faces"""
+    """Average adjacent regional cell values onto site boundary faces.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    i : Any
+        Index of the current quantity, boundary, or report step.
+    """
     nx = dic["regional_num_cells"][0]
     for quan in ["PRESSURE", "WAT_DEN"]:
         arr = dic[quan][i][0]

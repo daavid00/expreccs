@@ -1,7 +1,12 @@
 # SPDX-FileCopyrightText: 2023-2026 NORCE Research AS
 # SPDX-License-Identifier: GPL-3.0
 
-"""Utiliy functions to run the studies"""
+"""Execute expreccs simulations and coordinate model-dependent workflows.
+
+The module writes and runs reference, regional, and site decks, prepares the
+boundary data required by each site boundary-condition type, and dispatches
+postprocessing figure generation.
+"""
 
 import os
 import subprocess
@@ -13,12 +18,21 @@ from expreccs.utils.mapboundaries import (
     temporal_interpolation_flux,
     temporal_interpolation_pressure,
 )
+from expreccs.utils.terminal import expreccs_info
 from expreccs.utils.writefile import write_files
 from expreccs.visualization.plotting import plot_results
 
 
 def simulations(dic, name):
-    """Run OPM Flow"""
+    """Run OPM Flow for one generated model.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    name : Any
+        Model or folder name.
+    """
     command = (
         f"{dic['flow']} --output-dir={dic[f'fsim{name}']} "
         f"{dic[f'fpre{name}']}{name.upper()}.DATA"
@@ -27,18 +41,30 @@ def simulations(dic, name):
 
 
 def plotting(dic):
-    """Generate the figures"""
+    """Generate postprocessing figures.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["folders"] = [dic["fol"]]
     post_dir = f"{dic['fol']}/postprocessing"
     if not os.path.exists(post_dir):
         os.makedirs(post_dir, exist_ok=True)
     os.chdir(post_dir)
-    print("\nPlot: Generation of png figures, please wait.")
+    expreccs_info("generation of png figures, please wait...")
     plot_results(dic)
 
 
 def run_models(dic):
-    """Run the reference, regional, and site geological models"""
+    """Write and run the selected reference, regional, and site models.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     if dic["mode"] in ["all", "reference"]:
         write_files(dic, "reference")
         simulations(dic, "reference")

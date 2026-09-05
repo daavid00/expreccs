@@ -8,4 +8,4 @@ mpirun -np 8 flow $OUT/REFINED.DATA & mpirun -np 8 flow $OUT/SUBMODEL.DATA & wai
 expreccs -i "$OUT/REFINED $OUT/SUBMODEL" -n 1 -o $OUT/expreccs
 sed -i.bak "s|REGIONS|REGIONS\nINCLUDE\nOPERNUM_EXPRECCS.INC/\n|g" $OUT/REFINED.DATA && rm -f $OUT/REFINED.DATA.bak
 mpirun -np 8 flow $OUT/REFINED.DATA & mpirun -np 8 flow $OUT/expreccs/EXPRECCS.DATA
-plopm -i "$OUT/REFINED $OUT/expreccs/EXPRECCS" -o $OUT -v opernum -s ',,1 ,,1' -r 0 -xunits km -xlnum 5 -yunits km -yformat .0f -ylnum 5 -xformat .0f -subfigs 1,2 -d 16,12 -cbsfax 0.1,0.95,0.8,0.02 -f 30 -c Set1_r
+plopm -i "$OUT/REFINED $OUT/expreccs/EXPRECCS" -o $OUT -v opernum -s ',,1 ,,1' -r 0 -xu km -xnt 5 -yu km -yf .0f -ynt 5 -xf .0f -sg 1,2 -fs 16,12 -cbp 0.1,0.95,0.8,0.02 -fz 30 -c Set1_r

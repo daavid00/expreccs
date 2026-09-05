@@ -2,7 +2,18 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0914,R0915
 
-"""Main script for expreccs"""
+"""Command-line entry point and top-level workflow coordination for expreccs.
+
+expreccs creates and runs reference, regional, and site-scale OPM Flow models
+for hierarchical CO2 storage studies. It can also project boundary data between
+existing regional and site decks, perform iterative back-coupling, and generate
+comparison figures.
+
+This module parses and validates command-line arguments, initializes the shared
+runtime configuration, dispatches the selected modeling workflow, and reports
+generated outputs. Grid mapping, deck writing, simulation execution, result
+processing, and plotting are delegated to utility and visualization modules.
+"""
 
 import argparse
 import math
@@ -18,12 +29,26 @@ from expreccs.utils.inputvalues import process_input
 from expreccs.utils.mapproperties import mapping_properties
 from expreccs.utils.reg_sit_given_decks import create_deck
 from expreccs.utils.runs import plotting, run_models
+from expreccs.utils.terminal import (
+    cli_correct_value,
+    cli_error_value,
+    expreccs_error,
+    expreccs_info,
+    expreccs_success,
+    expreccs_tip,
+)
 from expreccs.utils.writefile import write_folders, write_properties
 from expreccs.visualization.plotting import plot_results
 
 
 def main(argv: list[str] | None = None) -> None:
-    """Main function for the expreccs executable"""
+    """Run the expreccs command-line workflow.
+
+    Parameters
+    ----------
+    argv : list[str] | None, optional
+        Arguments to parse instead of ``sys.argv[1:]``.
+    """
     cwd = os.getcwd()
     cmdargs = parse_args(argv)
     check_cmdargs(cmdargs)
@@ -42,20 +67,13 @@ def main(argv: list[str] | None = None) -> None:
     dic["compare"] = cmdargs.compare
 
     if dic["compare"]:
-        print("\nExecuting the compare functionality in expreccs, please wait.")
+        expreccs_info("processing the comparison, please wait...")
         dic["iterations"] = 0
         plot_results(dic)
-        print(
-            "\nThe execution of expreccs succeeded. "
-            + f"The generated files have been written to {os.getcwd()}/compare/\n"
-        )
+        expreccs_success("", f"{os.getcwd()}/compare", [""])
         return
 
-    print("\nExecuting expreccs, please wait.")
-    text = (
-        "\nThe execution of expreccs succeeded. "
-        + f"The generated files have been written to {dic['fol']}/\n"
-    )
+    expreccs_info("executing expreccs, please wait...")
 
     if len(file) > 1:
         for i, name in enumerate(["reg", "sit"]):
@@ -78,7 +96,7 @@ def main(argv: list[str] | None = None) -> None:
             dic["sit"],
             dic["fsit"],
         )
-        print(text)
+        expreccs_success("generated files written to ", dic["fol"], [""])
         return
 
     process_input(dic, file[0])
@@ -102,37 +120,45 @@ def main(argv: list[str] | None = None) -> None:
     write_folders(dic)
 
     os.chdir(dic["fol"])
-    mapping_properties(dic)
-    write_properties(dic)
-    init_multipliers(dic)
+    try:
+        mapping_properties(dic)
+        write_properties(dic)
+        init_multipliers(dic)
 
-    run_models(dic)
+        run_models(dic)
 
-    if dic["iterations"] > 0 and dic["mode"] != "none":
-        if not dic["subfolders"]:
-            print(
-                "\nBackcpupling requires the subfolder structure, i.e., by running expreccs "
-                "with the default value for the flag '-s 1'. Please rerun expreccs without "
-                "the '-s' flag.\n"
-            )
-            raise SystemExit(1)
-        backcoupling(dic)
+        if dic["iterations"] > 0 and dic["mode"] != "none":
+            if not dic["subfolders"]:
+                expreccs_error(
+                    "invalid combination, backcoupling requires "
+                    f"{cli_correct_value('-s 1')} and cannot be used with "
+                    f"{cli_error_value('-s 0')}."
+                )
+            backcoupling(dic)
 
-    if dic["plot"] != "no":
-        if shutil.which("latex") == "None":
-            print(
-                "\nLaTeX is recommended for the figures to show the nice fonts and given "
-                "formats. You can install it by following the instructions in the expreccs's "
-                "documentation."
-            )
-        plotting(dic)
+        if dic["plot"] != "no":
+            latex_available = shutil.which("latex") is not None
+            if not latex_available:
+                expreccs_tip(
+                    "LaTeX is recommended for figures to use the intended fonts and "
+                    "formats. Follow the installation instructions in the expreccs "
+                    "documentation."
+                )
+            plotting(dic)
 
-    print(text)
-    os.chdir(cwd)
+        expreccs_success("generated files written to ", dic["fol"], [""])
+    finally:
+        os.chdir(cwd)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    """Argument options"""
+    """Create the CLI parser and parse expreccs arguments.
+
+    Parameters
+    ----------
+    argv : list[str] | None, optional
+        Arguments to parse instead of ``sys.argv[1:]``.
+    """
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         description="Main method to simulate regional and site reservoirs for CO2 storage. "
@@ -258,50 +284,45 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def check_cmdargs(cmdargs: argparse.Namespace) -> None:
-    """Validate command-line arguments and incompatible operations.
-
-    The checks cover configuration and model-folder inputs, output names,
-    boundary specifications, frequency and time-discretization values,
-    rotations, comparison mode, workflow-specific options, and operations
-    requiring the subfolder structure.
+    """Validate command-line values and incompatible operations.
 
     Parameters
     ----------
-    cmdargs
-        Parsed arguments returned by :func:`load_parser`.
+    cmdargs : argparse.Namespace
+        Parsed command-line arguments.
 
     Raises
     ------
     SystemExit
-        If an argument is invalid or an incompatible combination is requested.
+        If an input value is invalid or required input cannot be used.
     """
     input_value = cmdargs.input
     if not input_value:
-        print("\nInvalid value for '-i', the input cannot be empty.\n")
-        raise SystemExit(1)
+        expreccs_error(
+            f"invalid value {cli_error_value('-i')}, the input cannot be empty."
+        )
 
     if not cmdargs.output:
-        print("\nInvalid value for '-o', the output folder cannot be empty.\n")
-        raise SystemExit(1)
+        expreccs_error(
+            f"invalid value {cli_error_value('-o')}, the output folder cannot be empty."
+        )
 
     input_paths = input_value.split()
     if len(input_paths) not in [1, 2]:
-        print(
-            f"\nInvalid value '-i {input_value}', expected one configuration "
-            "file or two model-folder paths separated by a space.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-i {input_value}')}, expected one "
+            "configuration file or two model-folder paths separated by a space."
         )
-        raise SystemExit(1)
 
     configuration_input = len(input_paths) == 1
     folder_input = len(input_paths) == 2
 
     if configuration_input and not input_paths[0].lower().endswith(".toml"):
-        print(
-            f"\nInvalid extension for '-i {input_value}', the valid extension "
-            "is .toml, or provide paths to the regional and site model "
-            "folders.\n"
+        expreccs_error(
+            f"invalid extension {cli_error_value(f'-i {input_value}')}, the valid "
+            f"extension is {cli_correct_value('.toml')}, or provide paths to the "
+            "regional and site model folders."
         )
-        raise SystemExit(1)
 
     transform = cmdargs.transform
     try:
@@ -310,11 +331,10 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
         transform_value = float("nan")
 
     if not math.isfinite(transform_value):
-        print(
-            f"\nInvalid value '-t {transform}', expected a finite number of "
-            "degrees.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-t {transform}')}, expected a finite "
+            "number of degrees."
         )
-        raise SystemExit(1)
 
     boundaries = cmdargs.boundaries
     boundary_pattern = re.fullmatch(
@@ -322,30 +342,28 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
         boundaries,
     )
     if not boundary_pattern:
-        print(
-            f"\nInvalid value '-b {boundaries}', expected four integers inside "
-            "brackets, e.g., '-b [0,2,0,0]'.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-b {boundaries}')}, expected four "
+            "integers inside brackets, "
+            f"{cli_correct_value('e.g., -b [0,2,0,0]')}."
         )
-        raise SystemExit(1)
 
     boundary_values = [int(value.strip()) for value in boundaries[1:-1].split(",")]
     if any(value < -1 for value in boundary_values):
-        print(
-            f"\nInvalid value '-b {boundaries}', boundary entries must be -1 "
-            "or non-negative integers.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-b {boundaries}')}, boundary entries "
+            "must be -1 or non-negative integers."
         )
-        raise SystemExit(1)
 
     frequency = cmdargs.frequency
     if not re.fullmatch(
         r"[1-9]\d*(?:\s*,\s*[1-9]\d*)*",
         frequency,
     ):
-        print(
-            f"\nInvalid value '-f {frequency}', expected positive integers "
-            "separated by commas.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-f {frequency}')}, expected positive "
+            "integers separated by commas."
         )
-        raise SystemExit(1)
 
     frequency_values = [int(value.strip()) for value in frequency.split(",")]
 
@@ -358,18 +376,17 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
     if not acoeff_values or any(
         value < 0 or not math.isfinite(value) for value in acoeff_values
     ):
-        print(
-            f"\nInvalid value '-a {acoeff}', expected non-negative finite "
-            "numbers separated by commas.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-a {acoeff}')}, expected non-negative "
+            "finite numbers separated by commas."
         )
-        raise SystemExit(1)
 
     if len(acoeff_values) not in [1, len(frequency_values)]:
-        print(
-            f"\nInvalid value '-a {acoeff}', expected one coefficient or one "
-            "coefficient for each value provided with '-f'.\n"
+        expreccs_error(
+            f"invalid value {cli_error_value(f'-a {acoeff}')}, expected one "
+            "coefficient or one coefficient for each value provided with "
+            f"{cli_correct_value('-f')}."
         )
-        raise SystemExit(1)
 
     compare = cmdargs.compare
     if compare:
@@ -391,19 +408,18 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
             if getattr(cmdargs, name) != default
         ]
         if invalid_options:
-            print(
-                "\nInvalid combination, '-c compare' runs the standalone "
-                "comparison workflow and cannot be combined with "
-                f"{', '.join(invalid_options)}.\n"
+            expreccs_error(
+                f"invalid combination, {cli_error_value('-c compare')} runs the "
+                "standalone comparison workflow and cannot be combined with "
+                f"{cli_error_value(', '.join(invalid_options))}."
             )
-            raise SystemExit(1)
 
         if cmdargs.subfolders != "1":
-            print(
-                "\nInvalid combination, '-c compare' requires the subfolder "
-                "structure and cannot be used with '-s 0'.\n"
+            expreccs_error(
+                f"invalid combination, {cli_error_value('-c compare')} requires the "
+                "subfolder structure and cannot be used with "
+                f"{cli_error_value('-s 0')}."
             )
-            raise SystemExit(1)
 
         return
 
@@ -420,12 +436,11 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
             if getattr(cmdargs, name) != default
         ]
         if invalid_options:
-            print(
-                "\nInvalid option when providing regional and site model "
-                "folders; this workflow cannot be combined with "
-                f"{', '.join(invalid_options)}.\n"
+            expreccs_error(
+                "invalid option when providing regional and site model folders; this "
+                "workflow cannot be combined with "
+                f"{cli_error_value(', '.join(invalid_options))}."
             )
-            raise SystemExit(1)
 
     if configuration_input:
         folder_options = {
@@ -442,16 +457,15 @@ def check_cmdargs(cmdargs: argparse.Namespace) -> None:
             if getattr(cmdargs, name) != default
         ]
         if invalid_options:
-            print(
-                "\nInvalid option for a TOML configuration file; options "
-                f"{', '.join(invalid_options)} can only be used when providing "
-                "regional and site model folders.\n"
+            expreccs_error(
+                "invalid option for a TOML configuration file; options "
+                f"{cli_error_value(', '.join(invalid_options))} can only be used when "
+                "providing regional and site model folders."
             )
-            raise SystemExit(1)
 
     if cmdargs.plot != "no" and cmdargs.subfolders != "1":
-        print(
-            "\nInvalid combination, plot generation requires the subfolder "
-            "structure and cannot be used with '-s 0'.\n"
+        expreccs_error(
+            "invalid combination, plot generation requires the subfolder structure "
+            "and cannot be used with "
+            f"{cli_error_value('-s 0')}."
         )
-        raise SystemExit(1)

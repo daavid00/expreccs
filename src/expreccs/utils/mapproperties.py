@@ -2,13 +2,25 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=R0912,R0914,R0915
 
-"""Utiliy function for mapping quantities in the different sites"""
+"""Build grid coordinates and map wells, faults, sensors, and site regions.
+
+The module derives regional, reference, and site cell geometry from refinement
+settings, assigns geological layers, locates model features, and optionally
+rotates the site grid. Derived arrays are stored in the shared configuration for
+deck generation and boundary projection.
+"""
 
 import numpy as np
 
 
 def mapping_properties(dic):
-    """Handle the reservoir location settings"""
+    """Build model coordinates and map geological feature positions.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["site_dims"] = [
         dic["site_location"][j + 3] - dic["site_location"][j] for j in range(3)
     ]
@@ -90,7 +102,13 @@ def mapping_properties(dic):
 
 
 def rotate_grid(dic):
-    """Rotate the grid site if requiered"""
+    """Rotate site-grid pillar coordinates when requested.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["site_xc"], dic["site_yc"] = [], []
     angle = dic["rotate"] * np.pi / 180
     cosang, sinang = np.cos(angle), np.sin(angle)
@@ -110,7 +128,13 @@ def rotate_grid(dic):
 
 
 def positions_regional(dic):
-    """Locate well, site, and fault positions"""
+    """Locate wells, faults, sensors, and the site in the regional grid.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["regional_fipnum"] = []
     dic["site_corners"] = [[-1, -1, 0], [-1, -1, 0]]
     dic["asleft"], dic["asright"], dic["asbottom"], dic["astop"] = (
@@ -206,7 +230,13 @@ def positions_regional(dic):
 
 
 def positions_rotation(dic):
-    """Find the locations after the rotation"""
+    """Locate site features on a rotated site grid.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["site_fipnum"] = ["1 "] * (
         dic["site_num_cells"][0] * dic["site_num_cells"][1] * dic["site_num_cells"][2]
     )
@@ -253,7 +283,13 @@ def positions_rotation(dic):
 
 
 def positions_site(dic):
-    """Locate well and fault positions in the site reservoir"""
+    """Locate wells, faults, and the sensor in the site grid.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["site_fipnum"] = ["1 "] * (
         dic["site_num_cells"][0] * dic["site_num_cells"][1] * dic["site_num_cells"][2]
     )
@@ -297,7 +333,13 @@ def positions_site(dic):
 
 
 def positions_reference(dic):
-    """Locate well, fault, and site positions in the reference reservoir"""
+    """Locate wells, faults, sensors, and the site in the reference grid.
+
+    Parameters
+    ----------
+    dic : Any
+        Shared mutable expreccs configuration and runtime data.
+    """
     dic["reference_fipnum"] = []
     for k in dic["reference_zmz_mid"]:
         for j in dic["reference_ymy_mid"]:

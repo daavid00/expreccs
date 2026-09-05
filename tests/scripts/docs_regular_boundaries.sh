@@ -10,5 +10,5 @@ if [ ! -d $WHR ]; then
 else
     WHR1="test_outputs/popen-gw4/test_4_site_regional0"
 fi
-plopm -i "$WHR/site_closed/SITE_CLOSED $WHR/expreccs/EXPRECCS $WHR/reference/REFERENCE" -v sgas -s ',,1 ,,1 ,,1' -subfigs 1,3 -suptitle 0 -cbsfax 0.2,0.95,0.6,0.02 -d 24,8 -cformat .1f -f 20 -xunits km -yunits km -xformat .0f -yformat .0f -x '[0,15000]' -y '[0,15000]' -delax 1 -o $OUT
-plopm -i "$WHR1/regional/REGIONAL $WHR1/expreccs/EXPRECCS $WHR1/expreccs_dpincrease/EXPRECCS_DPINCREASE $WHR1/expreccs_perfipnum/EXPRECCS_PERFIPNUM" -v rpr:3 -o $OUT -step 1
+plopm -i "$WHR/site_closed/SITE_CLOSED $WHR/expreccs/EXPRECCS $WHR/reference/REFERENCE" -v sgas -s ',,1 ,,1 ,,1' -sg 1,3 -st 0 -cbp 0.2,0.95,0.6,0.02 -fs 24,8 -cbf .1f -fz 20 -xu km -yu km -xf .0f -yf .0f -x '[0,15000]' -y '[0,15000]' -rdl 1 -o $OUT
+plopm -i "$WHR1/regional/REGIONAL $WHR1/expreccs/EXPRECCS $WHR1/expreccs_dpincrease/EXPRECCS_DPINCREASE $WHR1/expreccs_perfipnum/EXPRECCS_PERFIPNUM" -v rpr:3 -o $OUT -sp 1

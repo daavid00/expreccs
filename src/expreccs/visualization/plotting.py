@@ -2,7 +2,23 @@
 # SPDX-License-Identifier: GPL-3.0
 # pylint: disable=C0302,E1102,R0912,R0914,R0915,C0301
 
-"""Plot top surface for the reference, regional, and site reservoirs"""
+"""Create time-series and spatial comparison figures for expreccs.
+
+This module coordinates visualization of reference, regional, and site-model
+results produced by OPM Flow. It configures Matplotlib, loads simulation data,
+and writes figures for field and site summary vectors, well controls, sensor
+responses, plume distance from the site boundary, and reference-to-site errors.
+
+The plotting workflow supports a single expreccs output folder and comparisons
+across several output folders. Summary quantities are read from SMSPEC data,
+while spatial quantities are derived from restart and initialization arrays by
+the visualization reading module. Two-dimensional geological, final-time, and
+difference maps are delegated to the maps2d module.
+
+Plotting state, loaded simulation data, labels, styles, and derived series are
+stored in the shared configuration dictionary. The main entry point initializes
+these values before dispatching the individual plotting routines.
+"""
 
 import os
 import shutil
@@ -14,12 +30,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from alive_progress import alive_bar
 
+from expreccs.utils.terminal import expreccs_info
 from expreccs.visualization.maps2d import (
     final_time_maps,
     final_time_maps_difference,
     geological_maps,
 )
-from expreccs.visualization.reading import reading_simulations
+from expreccs.visualization.reading import read_simulations
 
 GAS_DEN_REF = 1.86843  # kg/sm3
 WAT_DEN_REF = 998.108  # kg/sm3
@@ -28,12 +45,26 @@ KG_TO_MT = 1e-9
 
 
 def plot_results(dic):
-    """Plot the 2D maps/1D projections for the different quantities"""
+    """Generate all figures requested by the expreccs plotting workflow.
+
+    Configure Matplotlib, identify output folders, initialize plotting metadata,
+    read the selected OPM Flow cases, and dispatch summary, sensor, plume-distance,
+    maximum-difference, geological, and final-time plots. In comparison mode,
+    figures combine site results from multiple expreccs output folders with one
+    reference result.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting configuration. Expected entries include ``folders``,
+        ``compare``, ``plot``, and ``iterations``. The routine adds output paths,
+        labels, styles, loaded case data, figure counts, and plotting arrays.
+    """
     font = {"family": "normal", "weight": "normal", "size": 16}
     matplotlib.rc("font", **font)
     plt.rcParams.update(
         {
-            "text.usetex": shutil.which("latex") != "None",
+            "text.usetex": shutil.which("latex") is not None,
             "font.family": "monospace",
             "legend.columnspacing": 0.9,
             "legend.handlelength": 2.2,
@@ -63,7 +94,7 @@ def plot_results(dic):
         dic["id"] = folder0.split("/")[-1] + "_"
     dic["lfolders"] = [name.split("/")[-1].replace("_", " ") for name in dic["folders"]]
     plotting_settings(dic)
-    reading_simulations(dic)
+    read_simulations(dic)
     dic["tot"] = 0
     dic["tod"] = 0
     if dic["plot"] in ["reference", "regional", "site"]:
@@ -89,7 +120,7 @@ def plot_results(dic):
     for i, quantity in enumerate(quantites):
         summary_plot(dic, i, quantity)
     dic["fig"], dic["axis"], dic["figs"], dic["axiss"] = [], [], [], []
-    print("Over time maximum difference and sensor:")
+    expreccs_info("over time maximum difference and sensor:")
     show_progress = sys.stdout.isatty()
     if show_progress:
         bar_ctx = alive_bar(len(dic["quantity"]), bar="fish")
@@ -115,7 +146,18 @@ def plot_results(dic):
 
 
 def plotting_settings(dic):
-    """Set the color/line styles and labels"""
+    """Initialize plotting styles, quantities, labels, and physical units.
+
+    Populate the shared configuration with line colors, markers, line styles,
+    reservoir labels, colormaps, restart quantities, output names, and axis units
+    used consistently by the time-series and two-dimensional plotting routines.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting configuration. ``iterations`` controls the labels generated
+        for iteratively back-coupled regional models.
+    """
     dic["colors"] = [
         "#1f77b4",
         "#ff7f0e",
@@ -219,7 +261,26 @@ def plotting_settings(dic):
 
 
 def wells_site(dic, nquan, nfol, ndeck, nwell):
-    """Plot the injection rates and BHP"""
+    """Add one well-control series to the current summary axis.
+
+    Read bottom-hole pressure, gas-injection rate, or water-injection rate from the
+    selected model summary. Injection rates are converted from surface-volume rates
+    to megatonnes per year before the series is styled and added to the axis.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing folders, decks, summary vectors, dates,
+        styles, labels, and the current ``axis``.
+    nquan : int
+        Summary-quantity index: 0 for ``WBHP``, 1 for ``WGIR``, or 2 for ``WWIR``.
+    nfol : int
+        Index of the current expreccs output folder.
+    ndeck : int
+        Index of the reservoir case within the folder's selected decks.
+    nwell : str
+        OPM summary well name used to construct the requested summary key.
+    """
     fol = dic["folders"][nfol]
     res = dic[fol]["decks"][ndeck]
     smsp = dic[fol][res]["smsp"]
@@ -246,7 +307,24 @@ def wells_site(dic, nquan, nfol, ndeck, nwell):
 
 
 def summary_site(dic, nfol, ndeck, opmn):
-    """Plot summary quantities"""
+    """Add one model summary vector to the current axis.
+
+    Read the requested OPM summary key, convert gas in-place values to kilotonnes,
+    and convert block face-flow rates to pore-area-normalized fluxes. In comparison
+    mode, the reference series is plotted only from the first folder.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing model summaries, dates, sensor geometry,
+        physical properties, styles, labels, and the current ``axis``.
+    nfol : int
+        Index of the current expreccs output folder.
+    ndeck : int
+        Index of the selected reservoir case within that folder.
+    opmn : str
+        Complete OPM summary key, including region, block, or well qualifiers.
+    """
     fol = dic["folders"][nfol]
     res = dic[fol]["decks"][ndeck]
     smsp = dic[fol][res]["smsp"]
@@ -283,7 +361,22 @@ def summary_site(dic, nfol, ndeck, opmn):
 
 
 def handle_site_summary(dic, i, quantity):
-    """Routine for the summary quantities at the site location"""
+    """Add site-scale and reference series for one summary quantity.
+
+    Iterate over selected non-regional models and dispatch region, block, or
+    well-summary plotting according to the requested quantity. Site well plots are
+    restricted to well names identified as site wells.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing folders, selected decks, labels, loaded
+        summaries, and the current ``axis``.
+    i : int
+        Position of the requested quantity in the summary-quantity sequence.
+    quantity : str
+        Summary quantity identifier, such as ``BHP``, ``PR``, ``GIP``, or ``BPR``.
+    """
     for nfol, fol in enumerate(dic["folders"]):
         decks = dic[fol]["decks"]
         lfolder = dic["lfolders"][nfol]
@@ -311,7 +404,22 @@ def handle_site_summary(dic, i, quantity):
 
 
 def summary_plot(dic, i, quantity):
-    """Plot the summary quantities"""
+    """Write site-scale and regional summary figures for one quantity.
+
+    Create separate figures for the site/reference and regional/reference views,
+    add all applicable model series, sort legend entries, format the time axis, and
+    write both PNG files to the configured output directory.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing folders, model summaries, output paths,
+        labels, styles, and the current figure and axis objects.
+    i : int
+        Index selecting the y-axis unit and well-summary quantity.
+    quantity : str
+        OPM summary quantity identifier used in labels, keys, and filenames.
+    """
     units = [
         "W$_{BHP}$ [bar]",
         "Rate [Mtpa]",
@@ -378,7 +486,19 @@ def summary_plot(dic, i, quantity):
 
 
 def over_time_distance(dic):
-    """Plot the distance from the closest saturation cell to the site border"""
+    """Plot minimum plume distance from the site boundary over time.
+
+    For the reference model and every site model, identify cells whose gas
+    saturation exceeds the configured threshold, calculate their minimum horizontal
+    distance to the inner site boundary, and write a combined time-series figure.
+    The reference calculation is restricted to the site region through FIPNUM.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing model grids, plume indicators, dates, site
+        geometry, comparison settings, styles, and the saturation threshold.
+    """
     dic["fig"], dic["axis"], dic["nmarker"] = [], [], 0
     fig, axis = plt.subplots()
     dic["fig"].append(fig)
@@ -386,7 +506,7 @@ def over_time_distance(dic):
     ntot = 0
     for nfol, fol in enumerate(dic["folders"]):
         ntot += len(["reference"] + dic[fol]["sites"])
-    print("Over time distance:")
+    expreccs_info("over time distance:")
     show_progress = sys.stdout.isatty()
     if show_progress:
         bar_ctx = alive_bar(ntot, bar="fish")
@@ -448,7 +568,30 @@ def over_time_distance(dic):
 
 
 def positions(dic, fol, res, nrst):
-    """Get the cell centers"""
+    """Calculate centers of cells selected by a plume indicator.
+
+    Obtain active-cell corner coordinates from the OPM grid and calculate the x, y,
+    and z center of every cell marked by the selected restart-step indicator. For
+    the reference model, only cells belonging to the site FIPNUM region are used.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing model grids, indicator arrays, and reference
+        FIPNUM values.
+    fol : str
+        Absolute or relative path identifying the current expreccs output folder.
+    res : str
+        Reservoir case name, such as ``reference`` or a site-model directory name.
+    nrst : int
+        Restart-step index whose plume indicator is evaluated.
+
+    Returns
+    -------
+    np.ndarray
+        Array with shape ``(n, 3)`` containing selected cell-center coordinates. An
+        empty ``(0, 3)`` array is returned when no cells satisfy the indicator.
+    """
     grid = dic[fol][res]["grid"]
     indicator = dic[fol][res]["indicator_array"]
     if res == "reference":
@@ -478,7 +621,26 @@ def positions(dic, fol, res, nrst):
 
 
 def handle_labels_distance(dic, nfol, res, fol, j):
-    """Manage the labeling for better visualization"""
+    """Add one labeled plume-distance series to the current axis.
+
+    Select labels, colors, and line styles for a reference or site-model distance
+    series. Comparison mode distinguishes output folders and plots the common
+    reference only once.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing dates, distance values, labels, styles,
+        comparison state, and the active distance axis.
+    nfol : int
+        Index of the current expreccs output folder.
+    res : str
+        Reference or site reservoir case name.
+    fol : str
+        Path identifying the current expreccs output folder.
+    j : int
+        Position of the reservoir case in the reference-plus-sites sequence.
+    """
     dates = dic[fol][res]["dates"]
     values = dic[fol][res]["indicator_plot"]
     if dic["compare"]:
@@ -518,7 +680,23 @@ def handle_labels_distance(dic, nfol, res, fol, j):
 
 
 def over_time_max_difference(dic, nqua, quantity):
-    """Plot the max difference between pressure/saturation"""
+    """Plot maximum absolute reference-to-site error over time.
+
+    Restrict reference arrays to the site FIPNUM region, remove terminal boundary
+    faces for positive-direction flux quantities, and calculate the maximum
+    absolute difference for every site model and restart step. The resulting series
+    are written together with the maximum reference value.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing reference and site arrays, FIPNUM values,
+        site dimensions, dates, labels, units, styles, and output paths.
+    nqua : int
+        Index of the restart quantity and its corresponding axis, unit, and filename.
+    quantity : str
+        Restart-derived quantity, such as saturation, pressure, phase flux, or CO2 mass.
+    """
     fig, axis = plt.subplots()
     dic["fig"].append(fig)
     dic["axis"].append(axis)
@@ -589,7 +767,22 @@ def over_time_max_difference(dic, nqua, quantity):
 
 
 def over_time_sensor(dic, nqua, quantity):
-    """Plot the quantities on the sensor"""
+    """Plot one restart-derived quantity at the sensor over time.
+
+    Extract the value at each model's sensor cell for every restart step and add the
+    reference and site series to a dedicated figure. Comparison mode plots the
+    reference once and identifies each site series by its output folder.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing sensor indices, restart arrays, dates,
+        labels, units, styles, comparison state, and output paths.
+    nqua : int
+        Index of the restart quantity and its corresponding figure, unit, and filename.
+    quantity : str
+        Restart-derived quantity evaluated at the sensor cell.
+    """
     fig, axis = plt.subplots()
     dic["figs"].append(fig)
     dic["axiss"].append(axis)
@@ -649,7 +842,26 @@ def over_time_sensor(dic, nqua, quantity):
 
 
 def handle_labels_difference(dic, res, j, nqua, nfol):
-    """Manage the labeling to improve the visualization"""
+    """Add one labeled maximum-difference series to its axis.
+
+    Construct a legend label containing the model name and maximum model value,
+    then select colors and line styles according to comparison mode, output folder,
+    and site-model position.
+
+    Parameters
+    ----------
+    dic : dict
+        Shared plotting data containing maximum-difference values, dates, labels,
+        styles, quantities, comparison state, and active axes.
+    res : str
+        Site reservoir case name.
+    j : int
+        Index of the site model within the current output folder.
+    nqua : int
+        Index of the plotted restart quantity and destination axis.
+    nfol : int
+        Index of the current expreccs output folder.
+    """
     quantity = dic["quantity"][nqua]
     fol = dic["folders"][nfol]
     dates = dic[fol][res]["dates"]
